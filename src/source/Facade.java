@@ -1,7 +1,8 @@
 package source;
 
 public class Facade {
-	Controller controller;
+	
+	private Controller controller;
 	
 	public Facade() {
 		controller = new Controller();

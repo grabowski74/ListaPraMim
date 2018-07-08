@@ -2,8 +2,8 @@ package source;
 
 public class Controller {
 	
-	ControllerItens controllerItens;
-	ControllerListas controllerListas;
+	private ControllerItens controllerItens;
+	private ControllerListas controllerListas;
 	
 	public Controller() {
 		controllerItens = new ControllerItens();
@@ -14,7 +14,7 @@ public class Controller {
 
 	public String adiconaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
-		return controllerItens.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra);
+		return controllerItens.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
 	}
 
 	public String adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
@@ -23,7 +23,7 @@ public class Controller {
 
 	public String adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra,
 			double preco) {
-		return controllerItens.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra);
+		return controllerItens.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
 	}
 
 	public void atualizaItem(String id, String atributo, String novoValor) {
