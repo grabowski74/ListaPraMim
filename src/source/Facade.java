@@ -12,7 +12,7 @@ public class Facade {
 	}
 	
 	public String adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		return controller.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);		
+		return controller.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);	
 	}
 	
 	public String adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
