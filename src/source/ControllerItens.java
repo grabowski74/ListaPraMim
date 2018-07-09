@@ -33,6 +33,13 @@ public class ControllerItens {
 	}
 
 	public void atualizaItem(String id, String atributo, String novoValor) {
+		if(atributo.equals("nome")) {
+			itens.get(id).setNome(novoValor);
+		} else if(atributo.equals("preco")) {
+			itens.get(id).setPreco(novoValor);
+		} else if(atributo.equals("localDeCompra")) {
+			itens.get(id).setLocalDeCompra(novoValor);
+		}
 		
 	}
 

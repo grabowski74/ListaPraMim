@@ -36,6 +36,19 @@ public class Itens {
 	public String getId() {
 		return this.id;
 	}
+
+	public void setNome(String novoValor) {
+		this.nome = novoValor;		
+	}
+
+	public void setPreco(String atributo) {
+		double novoPreco = Double.parseDouble(atributo);
+		this.preco = novoPreco;	
+	}
+
+	public void setLocalDeCompra(String novoValor) {
+		this.localDeCompra = novoValor;
+	}
 	
 	
 
