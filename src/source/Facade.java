@@ -1,8 +1,15 @@
 package source;
 
+import easyaccept.EasyAccept;
+
 public class Facade {
 	
 	private Controller controller;
+	
+	public static void main(String[] args) {
+		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt"};
+		EasyAccept.main(args);
+	}
 	
 	public Facade() {
 		controller = new Controller();
