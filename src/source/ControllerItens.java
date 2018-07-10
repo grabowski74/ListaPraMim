@@ -5,62 +5,63 @@ import java.util.Map;
 
 public class ControllerItens {
 	private Itens item;
-	private Map<String, Itens> itens;
+	private Map<Integer, Itens> itens;
+	private int id;
 	
 	public ControllerItens() {
-		itens = new HashMap<String, Itens>();
+		itens = new HashMap<Integer, Itens>();
+		this.id = 1;
 	}
-	public String adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida,
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida,
 			String localDeCompra, double preco) {
-		int id = itens.size() + 1;
 		item = new Itens(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco, id);
-		this.itens.put(item.getId(), item);
-		return item.getId();
+		this.itens.put(this.id, item);
+		return this.id++;
 	}
 
-	public String adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		int id = itens.size() + 1;
+	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
 		item = new Itens(nome, categoria, kg, localDeCompra, localDeCompra, preco, id);
-		this.itens.put(item.getId(), item);
-		return item.getId();
+		this.itens.put(this.id, item);
+		return this.id++;
 	}
 
-	public String adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
-		int id = itens.size() + 1;
+	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		item = new Itens(nome, categoria, unidade, localDeCompra, preco, id);
-		this.itens.put(item.getId(), item);
-		return item.getId();
+		this.itens.put(this.id, item);
+		return this.id++;
 	}
 
-	public void atualizaItem(String id, String atributo, String novoValor) {
+	public void atualizaItem(int id, String atributo, String novoValor) {
 		if(atributo.equals("nome")) {
 			itens.get(id).setNome(novoValor);
-		} else if(atributo.equals("preco")) {
-			itens.get(id).setPreco(novoValor);
-		} else if(atributo.equals("localDeCompra")) {
-			itens.get(id).setLocalDeCompra(novoValor);
-		}
+		} 
 		
 	}
 
-	public void adicionaPrecoItem(String id, String supermercado, double preco) {
-		// TODO Auto-generated method stub
-		
+	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 
-	public void deletaItem(String id) {
-		// TODO Auto-generated method stub
-		
+	public void deletaItem(int id) {
+		itens.remove(id);
 	}
 
 	public String getItem() {
-		// TODO Auto-generated method stub
-		return null;
+		String res = "";
+	    for (int id : itens.keySet()) {
+	    	res += itens.get(id).toString();
+	    }
+		return res;
 	}
 
 	public String getItemPorCategoria(String categoria) {
-		// TODO Auto-generated method stub
-		return null;
+		String res = "";
+		for (int id : itens.keySet()) {
+			if(itens.get(id).getCategoria().equals(categoria)) {
+				res += itens.get(id).toString();
+			}
+	    }
+		return res;
 	}
 
 	public String getItemPorMenorPreco() {
@@ -71,6 +72,9 @@ public class ControllerItens {
 	public String getItemPorPesquisa(String strPesquisada) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public String exibeItem(int id2) {
+		return itens.get(id2).toString();
 	}
 
 }

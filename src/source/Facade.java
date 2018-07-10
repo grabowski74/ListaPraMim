@@ -8,27 +8,27 @@ public class Facade {
 		controller = new Controller();
 	}
 	
-	public String adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
+	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco) {
 		return controller.adiconaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);		
 	}
 	
-	public String adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
+	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
 		return controller.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);	
 	}
 	
-	public String adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
+	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		return controller.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
 	}
 	
-	public void atualizaItem(String id, String atributo, String novoValor ) {
+	public void atualizaItem(int id, String atributo, String novoValor ) {
 		controller.atualizaItem(id, atributo, novoValor);
 	}
 	
-	public void adicionaPrecoItem(String id, String supermercado, double preco) {
+	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 		controller.adicionaPrecoItem(id, supermercado, preco);
 	}
 	
-	public void deletaItem(String id) {
+	public void deletaItem(int id) {
 		controller.deletaItem(id);
 	}
 	

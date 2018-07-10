@@ -10,4 +10,9 @@ public class ItemPorUnidade implements Categoria {
 		this.unidade = unidade;
 	}
 
+	@Override
+	public String getCategoria() {
+		return this.categoria;
+	}
+
 }

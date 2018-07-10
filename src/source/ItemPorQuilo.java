@@ -10,4 +10,9 @@ public class ItemPorQuilo implements Categoria {
 		this.kg = kg;
 	}
 
+	@Override
+	public String getCategoria() {
+		return this.categoria;
+	}
+
 }

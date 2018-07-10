@@ -12,4 +12,9 @@ public class ItemPorQnt implements Categoria {
 		this.unidadeDeMedida = unidadeDeMedida;
 	}
 
+	@Override
+	public String getCategoria() {
+		return this.categoria;
+	}
+
 }
