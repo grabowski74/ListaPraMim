@@ -19,12 +19,38 @@ public class ItemPorQnt implements Categoria {
 
 	@Override
 	public void atualizaItem(String atributo, String novoValor) {
-		if("qnt".equals(atributo)) {
+		if("quantidade".equals(atributo)) {
 			this.qnt = Integer.parseInt(novoValor);
-		} else if("unidadeDeMedida".equals(atributo)) {
+		} else if("unidade de medida".equals(atributo)) {
 			this.unidadeDeMedida = novoValor;
+		}else if ("categoria".equals(atributo)) {
+			this.categoria = novoValor;
 		}
 		
+	}
+
+	@Override
+	public int getUnidade() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getQuantidade() {
+		// TODO Auto-generated method stub
+		return this.qnt;
+	}
+
+	@Override
+	public String getUnidadeDeMedida() {
+		// TODO Auto-generated method stub
+		return this.unidadeDeMedida;
+	}
+
+	@Override
+	public double getKg() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

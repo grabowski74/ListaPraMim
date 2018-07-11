@@ -45,7 +45,12 @@ public class Itens {
 	}
 	
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", " + getListaPrecos();
+		if (this.categoria instanceof ItemPorQnt) {
+			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", " + this.categoria.getQuantidade() + " " + this.categoria.getUnidadeDeMedida() + ", Preco: " + getListaPrecos();
+		} else if (this.categoria instanceof ItemPorQuilo) {
+			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco por quilo: " + getListaPrecos();
+		}
+		return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco: " + getListaPrecos();
 	}
 	
 	protected String getListaPrecos() {
@@ -61,7 +66,10 @@ public class Itens {
 	}
 
 	public void atualizaItem(String atributo, String novoValor) {
-		categoria.atualizaItem(atributo, novoValor);	
+		if ("nome".equals(atributo)) {
+			this.nome = novoValor;
+		} 
+		this.categoria.atualizaItem(atributo, novoValor);	
 	}	
 
 }
