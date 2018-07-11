@@ -79,7 +79,7 @@ public class Controller {
 		return null;
 	}
 
-	public void adicionaCompraALista(String descritorLista, int qnt, String id) {
+	public void adicionaCompraALista(String descritorLista, int qnt, int id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -89,12 +89,12 @@ public class Controller {
 
 	}
 
-	public String pesquisaCompraEmLista(String descritorLista, String id) {
+	public String pesquisaCompraEmLista(String descritorLista, int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, String id, int qnt) {
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
 		// TODO Auto-generated method stub
 
 	}
@@ -104,7 +104,7 @@ public class Controller {
 		return null;
 	}
 
-	public void deletaCompraDaLista(String descritorLista, String id) {
+	public void deletaCompraDaLista(String descritorLista, int id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -119,7 +119,7 @@ public class Controller {
 		return null;
 	}
 
-	public String getItemListaPorItem(String id, int posicaoLista) {
+	public String getItemListaPorItem(int id, int posicaoLista) {
 		// TODO Auto-generated method stub
 		return null;
 	}

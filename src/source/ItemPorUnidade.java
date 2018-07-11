@@ -9,6 +9,10 @@ public class ItemPorUnidade implements Categoria {
 		this.categoria = categoria2;
 		this.unidade = unidade;
 	}
+	
+	public int getUnidade() {
+		return this.unidade;
+	}
 
 	@Override
 	public String getCategoria() {
@@ -19,8 +23,28 @@ public class ItemPorUnidade implements Categoria {
 	public void atualizaItem(String atributo, String novoValor) {
 		if("unidade".equals(atributo)) {
 			this.unidade = Integer.parseInt(novoValor);
+		} else if ("categoria".equals(atributo)) {
+			this.categoria = novoValor;
 		}
 		
+	}
+
+	@Override
+	public int getQuantidade() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getUnidadeDeMedida() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getKg() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
