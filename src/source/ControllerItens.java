@@ -1,12 +1,17 @@
 package source;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerItens {
 	private Itens item;
 	private Map<Integer, Itens> itens;
 	private int id;
+	private Comparator<Itens> comparador;
 
 	public ControllerItens() {
 		itens = new HashMap<Integer, Itens>();
@@ -50,16 +55,17 @@ public class ControllerItens {
 		validandoAtributo(atributo);
 		validandoNovoValor(atributo, novoValor);
 
-		
 		if (!itens.containsKey(id)) {
 			throw new NullPointerException("Erro na atualizacao de item: item nao existe.");
 		}
-		
+
 		itens.get(id).atualizaItem(atributo, novoValor);
 
 	}
 
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
+
+		validandoCadastroDePreco(id, supermercado, preco);
 		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 
@@ -76,26 +82,58 @@ public class ControllerItens {
 	}
 
 	public String getItemPorCategoria(String categoria) {
-		String res = "";
+		this.comparador = new StringComparator();
+		List<Itens> listaItens = new ArrayList<>();
+		
 		for (int id : itens.keySet()) {
 			if (itens.get(id).getCategoria().equals(categoria)) {
-				res += itens.get(id).toString();
+				listaItens.add(itens.get(id));
 			}
+		}
+		
+		String res = "";
+		Collections.sort(listaItens, this.comparador);
+		for(Itens i : listaItens) {
+			res += i.toString() + System.lineSeparator();
 		}
 		return res;
 	}
 
 	public String getItemPorMenorPreco() {
-		// TODO Auto-generated method stub
-		return null;
+		this.comparador = new PrecoComparator();
+		List<Itens> OutraListaItens = new ArrayList<>(itens.values());
+		Collections.sort(OutraListaItens, this.comparador);
+		String res = "";
+		for(Itens i : OutraListaItens) {
+			res += i.toString() + System.lineSeparator();
+		}
+		return res;
 	}
 
 	public String getItemPorPesquisa(String strPesquisada) {
-		// TODO Auto-generated method stub
-		return null;
+		this.comparador = new StringComparator();
+		List<Itens> listaItens = new ArrayList<>();
+		
+		for (int id : itens.keySet()) {
+			if (itens.get(id).getNome().startsWith(strPesquisada)) {
+				listaItens.add(itens.get(id));
+			}
+		}
+		
+		String res = "";
+		Collections.sort(listaItens, this.comparador);
+		for(Itens i : listaItens) {
+			res += i.toString() + System.lineSeparator();
+		}
+		return res;
 	}
 
 	public String exibeItem(int id2) {
+		if (id2 <= 0) {
+			throw new IllegalArgumentException("Erro na listagem de item: id invalido.");
+		} else if (!itens.containsKey(id2)) {
+			throw new NullPointerException("Erro na listagem de item: item nao existe.");
+		}
 		return itens.get(id2).toString();
 	}
 
@@ -153,35 +191,74 @@ public class ControllerItens {
 			throw new NullPointerException("Erro na atualizacao de item: atributo nao pode ser vazio ou nulo.");
 		}
 		if (!atributo.equals("nome") && !atributo.equals("categoria") && !atributo.equals("kg")
-				&& !atributo.equals("unidade") && !atributo.equals("quantidade")) {
+				&& !atributo.equals("unidade de medida") && !atributo.equals("quantidade")
+				&& !atributo.equals("unidade")) {
 			throw new IllegalArgumentException("Erro na atualizacao de item: atributo nao existe.");
 		}
 	}
 
 	private void validandoNovoValor(String atributo, String novoValor) {
+
 		if (novoValor.equals(null) || novoValor.trim().equals("")) {
-			throw new NullPointerException("Erro na atualizacao de item: novo valor de atributo nao pode ser vazio ou nulo.");
+			throw new NullPointerException(
+					"Erro na atualizacao de item: novo valor de atributo nao pode ser vazio ou nulo.");
 		}
-		
+
+		if (!atributo.equals("nome") && !atributo.equals("categoria") && !atributo.equals("unidade de medida")) {
+
+			if (atributo.equals("quantidade")) {
+				if (Integer.parseInt(novoValor) < 0) {
+					throw new IllegalArgumentException(
+							"Erro na atualizacao de item: valor de quantidade nao pode ser menor que zero.");
+				}
+			} else if (atributo.equals("unidade")) {
+				if (Integer.parseInt(novoValor) < 0) {
+					throw new IllegalArgumentException(
+							"Erro na atualizacao de item: valor de unidade nao pode ser menor que zero.");
+				}
+			} else if (atributo.equals("kg")) {
+				if (Double.parseDouble(novoValor)<0) {
+					throw new IllegalArgumentException(
+							"Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
+				}
+			}
+		}
+
 		if (atributo.equals("nome")) {
 			validandoEntradasNome(novoValor);
+
 		} else if (atributo.equals("categoria")) {
 			if (novoValor.equals(null) || novoValor.trim().equals("")) {
-				throw new NullPointerException("Erro na atualizaçao de item: categoria nao pode ser vazia ou nula.");
-			}
 
-			if (!novoValor.equals("limpeza") && !novoValor.equals("alimento industrializado")
+				throw new NullPointerException("Erro na atualizaçao de item: categoria nao pode ser vazia ou nula.");
+
+			} else if (!novoValor.equals("limpeza") && !novoValor.equals("alimento industrializado")
 					&& !novoValor.equals("alimento nao industrializado") && !novoValor.equals("higiene pessoal")) {
+
 				throw new IllegalArgumentException("Erro na atualizacao de item: categoria nao existe.");
 			}
-		} else if (atributo.equals("quantidade")) {
-			validandoEntradasValorUnidade(Integer.parseInt(novoValor));
-		} else if (atributo.equals("unidade")) {
-			validandoEntradasValorUnidade(Integer.parseInt(novoValor));
-		} else if (atributo.equals("kg")) {
-			validandoEntradasValorUnidade(Integer.parseInt(novoValor));
+		} else if (atributo.equals("unidade de medida")) {
+			if (novoValor.equals(null) || novoValor.trim().equals("")) {
+				
+				throw new NullPointerException("Erro na atualizaçao de item: unidade de medida nao pode ser vazia ou nula.");
+			}
 		}
-		
 	}
 
+	private void validandoCadastroDePreco(int id, String supermercado, double preco) {
+		if (supermercado.equals(null) || "".equals(supermercado.trim())) {
+			throw new NullPointerException("Erro no cadastro de preco: local de compra nao pode ser vazio ou nulo.");
+		}
+		if (preco < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: preco de item invalido.");
+		}
+		if (id < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de preco: id de item invalido.");
+		}
+
+		if (!itens.containsKey(id)) {
+			throw new NullPointerException("Erro no cadastro de preco: item nao existe.");
+		}
+
+	}
 }

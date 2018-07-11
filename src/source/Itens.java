@@ -1,6 +1,9 @@
 package source;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Itens {
@@ -45,7 +48,12 @@ public class Itens {
 	}
 	
 	public String toString() {
-		return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", " + getListaPrecos();
+		if (this.categoria instanceof ItemPorQnt) {
+			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", " + this.categoria.getQuantidade() + " " + this.categoria.getUnidadeDeMedida() + ", Preco: " + getListaPrecos();
+		} else if (this.categoria instanceof ItemPorQuilo) {
+			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco por quilo: " + getListaPrecos();
+		}
+		return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco: " + getListaPrecos();
 	}
 	
 	protected String getListaPrecos() {
@@ -61,7 +69,20 @@ public class Itens {
 	}
 
 	public void atualizaItem(String atributo, String novoValor) {
-		categoria.atualizaItem(atributo, novoValor);	
+		if ("nome".equals(atributo)) {
+			this.nome = novoValor;
+		} 
+		this.categoria.atualizaItem(atributo, novoValor);	
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public double getPreco() {
+		List<Double> listPrecos = new ArrayList<>(precos.values());
+		
+		return Collections.min(listPrecos);
 	}	
 
 }
