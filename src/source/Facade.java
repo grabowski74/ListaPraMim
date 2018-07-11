@@ -7,7 +7,7 @@ public class Facade {
 	private Controller controller;
 	
 	public static void main(String[] args) {
-		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt"};
+		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt"};
 		EasyAccept.main(args);
 	}
 	
