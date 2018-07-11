@@ -15,4 +15,12 @@ public class ItemPorUnidade implements Categoria {
 		return this.categoria;
 	}
 
+	@Override
+	public void atualizaItem(String atributo, String novoValor) {
+		if("unidade".equals(atributo)) {
+			this.unidade = Integer.parseInt(novoValor);
+		}
+		
+	}
+
 }

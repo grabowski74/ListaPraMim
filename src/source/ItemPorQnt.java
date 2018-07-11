@@ -17,4 +17,14 @@ public class ItemPorQnt implements Categoria {
 		return this.categoria;
 	}
 
+	@Override
+	public void atualizaItem(String atributo, String novoValor) {
+		if("qnt".equals(atributo)) {
+			this.qnt = Integer.parseInt(novoValor);
+		} else if("unidadeDeMedida".equals(atributo)) {
+			this.unidadeDeMedida = novoValor;
+		}
+		
+	}
+
 }
