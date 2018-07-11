@@ -73,6 +73,7 @@ public class Itens {
 			this.nome = novoValor;
 		} 
 		this.categoria.atualizaItem(atributo, novoValor);	
+
 	}
 
 	public String getNome() {
@@ -83,6 +84,7 @@ public class Itens {
 		List<Double> listPrecos = new ArrayList<>(precos.values());
 		
 		return Collections.min(listPrecos);
+
 	}	
 
 }

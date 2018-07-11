@@ -7,7 +7,7 @@ public class Facade {
 	private Controller controller;
 	
 	public static void main(String[] args) {
-		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt"};
+		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -63,7 +63,7 @@ public class Facade {
 		return controller.pesquisaListaDeCompras(descritorLista);
 	}
 	
-	public void adicionaCompraALista(String descritorLista, int qnt, String id) {
+	public void adicionaCompraALista(String descritorLista, int qnt, int id) {
 		controller.adicionaCompraALista(descritorLista, qnt, id);
 	}
 	
@@ -71,11 +71,11 @@ public class Facade {
 		controller.finalizarListaDeCompras(descritorLista, localDaCompra, valor);
 	}
 	
-	public String pesquisaCompraEmLista(String descritorLista, String id) {
+	public String pesquisaCompraEmLista(String descritorLista, int id) {
 		return controller.pesquisaCompraEmLista(descritorLista, id);
 	}
 	
-	public void atualizaCompraDeLista(String descritorLista, String id, int qnt) {
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
 		controller.atualizaCompraDeLista(descritorLista, id, qnt);
 	}
 	
@@ -83,7 +83,7 @@ public class Facade {
 		return controller.getItemLista(descritorLista, posicaoItem);
 	}
 	
-	public void deletaCompraDaLista(String descritorLista, String id) {
+	public void deletaCompraDaLista(String descritorLista, int id) {
 		controller.deletaCompraDaLista(descritorLista, id);
 	}
 	
@@ -95,8 +95,12 @@ public class Facade {
 		return controller.getItemListaPorData(data, posicao);
 	}
 	
-	public String getItemListaPorItem(String id, int posicaoLista) {
+	public String getItemListaPorItem(int id, int posicaoLista) {
 		return controller.getItemListaPorItem(id, posicaoLista);
+	}
+	
+	public String exibeItem(int id) {
+		return controller.exibeItem(id);
 	}
 	
 	

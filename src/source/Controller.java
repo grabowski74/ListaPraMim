@@ -79,7 +79,7 @@ public class Controller {
 		return null;
 	}
 
-	public void adicionaCompraALista(String descritorLista, int qnt, String id) {
+	public void adicionaCompraALista(String descritorLista, int qnt, int id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -89,12 +89,12 @@ public class Controller {
 
 	}
 
-	public String pesquisaCompraEmLista(String descritorLista, String id) {
+	public String pesquisaCompraEmLista(String descritorLista, int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, String id, int qnt) {
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
 		// TODO Auto-generated method stub
 
 	}
@@ -104,7 +104,7 @@ public class Controller {
 		return null;
 	}
 
-	public void deletaCompraDaLista(String descritorLista, String id) {
+	public void deletaCompraDaLista(String descritorLista, int id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -119,56 +119,8 @@ public class Controller {
 		return null;
 	}
 
-	public String getItemListaPorItem(String id, int posicaoLista) {
+	public String getItemListaPorItem(int id, int posicaoLista) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
-
-	private void validandoEntradasUnidadeMedida(String unidadeDeMedida) {
-		if (unidadeDeMedida.equals(null) || unidadeDeMedida.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
-		}
-
-	}
-
-	private void validandoEntradasPreco(double preco) {
-		if (preco <= 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: preco de item invalido.");
-		}
-
-	}
-
-	private void validandoEntradasLocal(String localDeCompra) {
-		if (localDeCompra.equals(null) || localDeCompra.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: local de compra nao pode ser vazio ou nulo.");
-		}
-
-	}
-
-	private void validandoEntradasCategoria(String categoria) {
-		if (categoria.equals(null) || categoria.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: categoria nao pode ser vazia ou nula.");
-		}
-
-		if (!categoria.equals("limpeza") && !categoria.equals("alimento industrializado")
-				&& !categoria.equals("alimento nao industrializado") && !categoria.equals("higiene pessoal")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao existe.");
-		}
-
-	}
-
-	private void validandoEntradasNome(String nome) {
-		if (nome.equals(null) || nome.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
-		}
-	}
-
-	private void validandoEntradasValorUnidade(int unidade) {
-		if (unidade < 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: valor de unidade nao pode ser menor que zero.");
-		}
-
 	}
 }

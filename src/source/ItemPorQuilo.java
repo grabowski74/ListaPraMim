@@ -19,8 +19,34 @@ public class ItemPorQuilo implements Categoria {
 	public void atualizaItem(String atributo, String novoValor) {
 		if("kg".equals(atributo)) {
 			this.kg = Double.parseDouble(novoValor);
+		}else if ("categoria".equals(atributo)) {
+			this.categoria = novoValor;
 		}
 		
+	}
+
+	@Override
+	public int getUnidade() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getQuantidade() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getUnidadeDeMedida() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getKg() {
+		// TODO Auto-generated method stub
+		return this.kg;
 	}
 
 }
