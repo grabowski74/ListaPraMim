@@ -1,6 +1,9 @@
 package source;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Itens {
@@ -70,6 +73,18 @@ public class Itens {
 			this.nome = novoValor;
 		} 
 		this.categoria.atualizaItem(atributo, novoValor);	
+
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public double getPreco() {
+		List<Double> listPrecos = new ArrayList<>(precos.values());
+		
+		return Collections.min(listPrecos);
+
 	}	
 
 }

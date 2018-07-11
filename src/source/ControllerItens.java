@@ -1,12 +1,17 @@
 package source;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerItens {
 	private Itens item;
 	private Map<Integer, Itens> itens;
 	private int id;
+	private Comparator<Itens> comparador;
 
 	public ControllerItens() {
 		itens = new HashMap<Integer, Itens>();
@@ -77,23 +82,50 @@ public class ControllerItens {
 	}
 
 	public String getItemPorCategoria(String categoria) {
-		String res = "";
+		this.comparador = new StringComparator();
+		List<Itens> listaItens = new ArrayList<>();
+		
 		for (int id : itens.keySet()) {
 			if (itens.get(id).getCategoria().equals(categoria)) {
-				res += itens.get(id).toString();
+				listaItens.add(itens.get(id));
 			}
+		}
+		
+		String res = "";
+		Collections.sort(listaItens, this.comparador);
+		for(Itens i : listaItens) {
+			res += i.toString() + System.lineSeparator();
 		}
 		return res;
 	}
 
 	public String getItemPorMenorPreco() {
-		// TODO Auto-generated method stub
-		return null;
+		this.comparador = new PrecoComparator();
+		List<Itens> OutraListaItens = new ArrayList<>(itens.values());
+		Collections.sort(OutraListaItens, this.comparador);
+		String res = "";
+		for(Itens i : OutraListaItens) {
+			res += i.toString() + System.lineSeparator();
+		}
+		return res;
 	}
 
 	public String getItemPorPesquisa(String strPesquisada) {
-		// TODO Auto-generated method stub
-		return null;
+		this.comparador = new StringComparator();
+		List<Itens> listaItens = new ArrayList<>();
+		
+		for (int id : itens.keySet()) {
+			if (itens.get(id).getNome().startsWith(strPesquisada)) {
+				listaItens.add(itens.get(id));
+			}
+		}
+		
+		String res = "";
+		Collections.sort(listaItens, this.comparador);
+		for(Itens i : listaItens) {
+			res += i.toString() + System.lineSeparator();
+		}
+		return res;
 	}
 
 	public String exibeItem(int id2) {
