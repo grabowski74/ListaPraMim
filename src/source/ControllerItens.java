@@ -65,12 +65,12 @@ public class ControllerItens {
 	}
 
 	public String getItemPorMenorPreco() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public String getItemPorPesquisa(String strPesquisada) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 	public String exibeItem(int id2) {

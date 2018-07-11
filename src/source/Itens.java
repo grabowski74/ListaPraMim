@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Itens {
-	
+
 	private String nome;
 	private Categoria categoria;
 	private Map<String, Double> precos = new HashMap<String, Double>();
