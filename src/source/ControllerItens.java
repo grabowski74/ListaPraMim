@@ -49,6 +49,7 @@ public class ControllerItens {
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		validandoAtributo(atributo);
 		validandoNovoValor(atributo, novoValor);
+
 		
 		if (!itens.containsKey(id)) {
 			throw new NullPointerException("Erro na atualizacao de item: item nao existe.");
