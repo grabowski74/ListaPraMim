@@ -15,4 +15,12 @@ public class ItemPorQuilo implements Categoria {
 		return this.categoria;
 	}
 
+	@Override
+	public void atualizaItem(String atributo, String novoValor) {
+		if("kg".equals(atributo)) {
+			this.kg = Double.parseDouble(novoValor);
+		}
+		
+	}
+
 }

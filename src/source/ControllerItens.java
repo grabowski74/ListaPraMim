@@ -50,13 +50,13 @@ public class ControllerItens {
 		validandoAtributo(atributo);
 		validandoNovoValor(atributo, novoValor);
 
+		
 		if (!itens.containsKey(id)) {
 			throw new NullPointerException("Erro na atualizacao de item: item nao existe.");
 		}
+		
+		itens.get(id).atualizaItem(atributo, novoValor);
 
-		if (atributo.equals("nome")) {
-			itens.get(id).setNome(novoValor);
-		}
 
 	}
 
