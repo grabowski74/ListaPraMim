@@ -7,7 +7,7 @@ public class Facade {
 	private Controller controller;
 	
 	public static void main(String[] args) {
-		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt"};
+		args = new String[] {"source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case2.txt",};
 		EasyAccept.main(args);
 	}
 	
@@ -39,20 +39,20 @@ public class Facade {
 		controller.deletaItem(id);
 	}
 	
-	public String getItem() {
-		return controller.getItem();
+	public String getItem(int posicao) {
+		return controller.getItem(posicao);
 	}
 	
-	public String getItemPorCategoria(String categoria) {
-		return controller.getItemPorCategoria(categoria);
+	public String getItemPorCategoria(String categoria, int posicao) {
+		return controller.getItemPorCategoria(categoria, posicao);
 	}
 	
-	public String getItemPorMenorPreco() {
-		return controller.getItemPorMenorPreco();
+	public String getItemPorMenorPreco(int posicao) {
+		return controller.getItemPorMenorPreco(posicao);
 	}
 	
-	public String getItemPorPesquisa(String strPesquisada) {
-		return controller.getItemPorPesquisa(strPesquisada);
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		return controller.getItemPorPesquisa(strPesquisada, posicao);
 	}
 	
 	public void adicionaListaDeCompras(String descritorLista) {

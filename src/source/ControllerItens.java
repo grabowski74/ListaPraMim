@@ -20,32 +20,21 @@ public class ControllerItens {
 
 	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
-		validandoEntradasNome(nome);
-		validandoEntradasCategoria(categoria);
-		validandoEntradasLocal(localDeCompra);
-		validandoEntradasPreco(preco);
-		validandoEntradasUnidadeMedida(unidadeDeMedida);
+		
 		item = new Itens(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		validandoEntradasNome(nome);
-		validandoEntradasCategoria(categoria);
-		validandoEntradasLocal(localDeCompra);
-		validandoEntradasPreco(preco);
-		item = new Itens(nome, categoria, kg, localDeCompra, localDeCompra, preco, id);
+		
+		item = new Itens(nome, categoria, kg, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
-		validandoEntradasNome(nome);
-		validandoEntradasCategoria(categoria);
-		validandoEntradasLocal(localDeCompra);
-		validandoEntradasPreco(preco);
-		validandoEntradasValorUnidade(unidade);
+		
 		item = new Itens(nome, categoria, unidade, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
@@ -73,57 +62,83 @@ public class ControllerItens {
 		itens.remove(id);
 	}
 
-	public String getItem() {
-		String res = "";
-		for (int id : itens.keySet()) {
-			res += itens.get(id).toString();
-		}
-		return res;
-	}
-
-	public String getItemPorCategoria(String categoria) {
+	public String getItem(int posicao) {
 		this.comparador = new StringComparator();
 		List<Itens> listaItens = new ArrayList<>();
-		
+
 		for (int id : itens.keySet()) {
-			if (itens.get(id).getCategoria().equals(categoria)) {
-				listaItens.add(itens.get(id));
-			}
+			listaItens.add(itens.get(id));
 		}
 		
 		String res = "";
 		Collections.sort(listaItens, this.comparador);
-		for(Itens i : listaItens) {
-			res += i.toString() + System.lineSeparator();
+		for (int i = 0; i < listaItens.size(); i++) {
+			if (i == posicao) {
+				res += listaItens.get(i).toString();
+			}
+		}
+
+		return res;
+	}
+
+	public String getItemPorCategoria(String categoria, int posicao) {
+		if (categoria.equals(null) || "".equals(categoria.trim())) {
+			throw new NullPointerException("");
+		} else if (!categoria.equals("limpeza") && !categoria.equals("alimento industrializado")
+				&& !categoria.equals("alimento nao industrializado") && !categoria.equals("higiene pessoal")) {
+			throw new IllegalArgumentException("Erro na listagem de item: categoria nao existe.");
+		}
+		this.comparador = new StringComparator();
+		List<Itens> listaItens = new ArrayList<>();
+
+		for (int id2 : itens.keySet()) {
+			if (itens.get(id2).getCategoria().equals(categoria)) {
+				listaItens.add(itens.get(id2));
+			}
+		}
+
+		String res = "";
+		Collections.sort(listaItens, this.comparador);
+		for (int i = 0; i < listaItens.size(); i++) {
+			if (i == posicao) {
+				res += listaItens.get(posicao).toString();
+			}
 		}
 		return res;
 	}
 
-	public String getItemPorMenorPreco() {
+	public String getItemPorMenorPreco(int posicao) {
 		this.comparador = new PrecoComparator();
 		List<Itens> OutraListaItens = new ArrayList<>(itens.values());
 		Collections.sort(OutraListaItens, this.comparador);
 		String res = "";
-		for(Itens i : OutraListaItens) {
-			res += i.toString() + System.lineSeparator();
+		for (int i = 0; i < OutraListaItens.size(); i++) {
+			if (i == posicao) {
+				res += OutraListaItens.get(i).toString();
+			}
 		}
 		return res;
 	}
 
-	public String getItemPorPesquisa(String strPesquisada) {
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
 		this.comparador = new StringComparator();
 		List<Itens> listaItens = new ArrayList<>();
-		
-		for (int id : itens.keySet()) {
-			if (itens.get(id).getNome().startsWith(strPesquisada)) {
-				listaItens.add(itens.get(id));
+
+		for (int id2 : itens.keySet()) {
+			for (String str: itens.get(id2).getNome().split(" ")) {
+				if (str.toLowerCase().startsWith(strPesquisada)) {
+				listaItens.add(itens.get(id2));
 			}
+			}
+			
 		}
-		
+
 		String res = "";
 		Collections.sort(listaItens, this.comparador);
-		for(Itens i : listaItens) {
-			res += i.toString() + System.lineSeparator();
+		for (int i = 0; i < listaItens.size(); i++) {
+			if (i == posicao) {
+				res += listaItens.get(i).toString();
+			}
 		}
 		return res;
 	}
@@ -139,51 +154,10 @@ public class ControllerItens {
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
 
-	private void validandoEntradasUnidadeMedida(String unidadeDeMedida) {
-		if (unidadeDeMedida.equals(null) || unidadeDeMedida.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
-		}
-
-	}
-
-	private void validandoEntradasPreco(double preco) {
-		if (preco <= 0) {
-			throw new IllegalArgumentException("Erro no cadastro de item: preco de item invalido.");
-		}
-
-	}
-
-	private void validandoEntradasLocal(String localDeCompra) {
-		if (localDeCompra.equals(null) || localDeCompra.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: local de compra nao pode ser vazio ou nulo.");
-		}
-
-	}
-
-	private void validandoEntradasCategoria(String categoria) {
-		if (categoria.equals(null) || categoria.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: categoria nao pode ser vazia ou nula.");
-		}
-
-		if (!categoria.equals("limpeza") && !categoria.equals("alimento industrializado")
-				&& !categoria.equals("alimento nao industrializado") && !categoria.equals("higiene pessoal")) {
-			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao existe.");
-		}
-
-	}
-
 	private void validandoEntradasNome(String nome) {
 		if (nome.equals(null) || nome.trim().equals("")) {
 			throw new NullPointerException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
 		}
-	}
-
-	private void validandoEntradasValorUnidade(int unidade) {
-		if (unidade < 0) {
-			throw new IllegalArgumentException(
-					"Erro no cadastro de item: valor de unidade nao pode ser menor que zero.");
-		}
-
 	}
 
 	private void validandoAtributo(String atributo) {
@@ -217,7 +191,7 @@ public class ControllerItens {
 							"Erro na atualizacao de item: valor de unidade nao pode ser menor que zero.");
 				}
 			} else if (atributo.equals("kg")) {
-				if (Double.parseDouble(novoValor)<0) {
+				if (Double.parseDouble(novoValor) < 0) {
 					throw new IllegalArgumentException(
 							"Erro na atualizacao de item: valor de quilos nao pode ser menor que zero.");
 				}
@@ -239,8 +213,9 @@ public class ControllerItens {
 			}
 		} else if (atributo.equals("unidade de medida")) {
 			if (novoValor.equals(null) || novoValor.trim().equals("")) {
-				
-				throw new NullPointerException("Erro na atualizaçao de item: unidade de medida nao pode ser vazia ou nula.");
+
+				throw new NullPointerException(
+						"Erro na atualizaçao de item: unidade de medida nao pode ser vazia ou nula.");
 			}
 		}
 	}
