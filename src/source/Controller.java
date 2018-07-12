@@ -52,21 +52,20 @@ public class Controller {
 		return controllerItens.exibeItem(id);
 	}
 
-	public String getItem() {
-		return controllerItens.getItem();
+	public String getItem(int posicao) {
+		return controllerItens.getItem(posicao);
 	}
 
-	public String getItemPorCategoria(String categoria) {
-		return controllerItens.getItemPorCategoria(categoria);
+	public String getItemPorCategoria(String categoria, int posicao) {
+		return controllerItens.getItemPorCategoria(categoria, posicao);
 	}
 
-	public String getItemPorMenorPreco() {
-		return controllerItens.getItemPorMenorPreco();
+	public String getItemPorMenorPreco(int posicao) {
+		return controllerItens.getItemPorMenorPreco(posicao);
 	}
 
-	public String getItemPorPesquisa(String strPesquisada) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getItemPorPesquisa(String strPesquisada, int posicao) {
+		return controllerItens.getItemPorPesquisa(strPesquisada, posicao);
 	}
 
 	public void adicionaListaDeCompras(String descritorLista) {
