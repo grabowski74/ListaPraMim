@@ -9,7 +9,7 @@ package source;
  * @author Gabriel Guimaraes de Almeida
  * 
  * 
- * Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim
+ * Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim 
  * 
  */
 import java.util.Comparator;
