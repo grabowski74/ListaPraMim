@@ -1,10 +1,25 @@
 package source;
-
+/**
+ * 
+ * Representaçao da classe dos itens instanciados de acordo com a sua unidade.
+ * 
+ * @author Matheus Silva Araujo
+ * @author Gabriel Guimaraes de Almeida
+ * 
+ * 
+ * Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim
+ * 
+ */
 public class ItemPorUnidade implements Categoria {
 	
 	private String categoria;
 	private int unidade;
-
+	
+	/**
+	 * Representacao do construtor de itens de acordo com a sua unidade;
+	 * @param categoria2 e a categoria do referido item;
+	 * @param unidade e a unidade do referido item.
+	 */
 	public ItemPorUnidade(String categoria2, int unidade) {
 		this.categoria = categoria2;
 		this.unidade = unidade;
