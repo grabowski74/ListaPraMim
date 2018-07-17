@@ -1,6 +1,6 @@
 package source;
 
-public class Compra {
+public class Compra{
 	
 	private int qnt;
 	private Item item;
@@ -15,7 +15,8 @@ public class Compra {
 	}
 	
 	public String toString() {
-		String res = this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
+		String res = "";
+		res = this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
 		
 		if(this.item.getQnt()!= 0){
 			res += ", " + this.item.getQnt() + " " + this.item.getUnidade();
@@ -33,6 +34,14 @@ public class Compra {
 
 	public int getQnt() {
 		return this.qnt;
+	}
+
+	public String getNome() {
+		return this.item.getNome();
+	}
+
+	public String getCategoria() {
+		return this.item.getCategoria();
 	}
 
 	
