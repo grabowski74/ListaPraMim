@@ -6,12 +6,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Classe que representa um item de supermercado.
+ * 
+ * @author Gabriel Guimaraes de Almeida
+ *
+ */
+
 public class Item {
 
 	private String nome;
+	// Atributo que representa a categoria do item.
 	private Categoria categoria;
+	// Atributo que representa uma lista com todos os precos dos varios
+	// supermercados que possuem esse tipo de produto.
 	private Map<String, Double> precos = new HashMap<String, Double>();
+	// Atributo que representa o cógigo do produto.
 	private int id;
+
+	/**
+	 * Construtor da classe item. Este representa a criacao de um item por
+	 * quantidade.
+	 * 
+	 * @param nome
+	 *            O nome do item.
+	 * @param categoria
+	 *            A categoria do item.
+	 * @param qnt
+	 *            Quanto desse produto será colocado no carrinho.
+	 * @param unidadeDeMedida
+	 *            A unidade de medida da quantidade desse item.
+	 * @param localDeCompra
+	 *            O nome do supermercado em que o item foi registrado.
+	 * @param preco
+	 *            Preco do item no supermercado em que o produto foi cadastrado.
+	 * @param id
+	 *            O codigo do item.
+	 */
 
 	public Item(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
 			int id) {
@@ -26,6 +57,24 @@ public class Item {
 		this.categoria = new ItemPorQnt(categoria, qnt, unidadeDeMedida);
 	}
 
+	/**
+	 * Construtor da classe item. Este representa a criacao de um item por quilo.
+	 * 
+	 * @param nome
+	 *            O nome do item.
+	 * @param categoria
+	 *            A categoria do item.
+	 * @param kg
+	 *            A quantidade do item em quilos.
+	 * @param localDeCompra
+	 *            O nome do supermercado em que o item foi registrado.
+	 * @param preco
+	 *            Preco do item no supermercado em que o produto foi cadastrado.
+	 * @param id
+	 *            O codigo do item.
+	 */
+
+
 	public Item(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
@@ -36,6 +85,24 @@ public class Item {
 		this.precos.put(localDeCompra, preco);
 		this.categoria = new ItemPorQuilo(categoria, kg);
 	}
+
+	/**
+	 * Construtor da classe item. Este representa a criacao de um item por unidade.
+	 * 
+	 * @param nome
+	 *            O nome do item.
+	 * @param categoria
+	 *            A categoria do item.
+	 * @param unidade
+	 *            O número de itens a serem colocados na lista de compras.
+	 * @param localDeCompra
+	 *            O nome do supermercado em que o item foi registrado.
+	 * @param preco
+	 *            Preco do item no supermercado em que o produto foi cadastrado.
+	 * @param id
+	 *            O codigo do item.
+	 */
+	
 
 	public Item(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
