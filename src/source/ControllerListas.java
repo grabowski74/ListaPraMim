@@ -45,17 +45,16 @@ public class ControllerListas {
 		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
-		mapaDasListas.get(descritorLista).atualizaCompra(id, qnt);
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt, String operacao) {
+		mapaDasListas.get(descritorLista).atualizaCompra(id, qnt, operacao);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapaDasListas.get(descritorLista).getItemLista(posicaoItem);
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
-		// TODO Auto-generated method stub
+		mapaDasListas.get(descritorLista).deletaCompraDaLista(id);
 		
 	}
 

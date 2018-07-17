@@ -25,15 +25,44 @@ public class Lista {
 
 	}
 
-	public void atualizaCompra(int id, int qnt) {
+	public void atualizaCompra(int id, int qnt, String operacao) {
+		
 		for (Compra compra: compras) {
 			if (compra.getId() == id) {
-				compra.atualiza(qnt);
+				compra.atualiza(qnt, operacao);
+				if(compra.getQnt() < 1){
+					compras.remove(compra);
+					break;
+				}
 			}
 		}
 	}
 
 	public String pesquisa(int id) {
-		return compras.get(id).toString();
+		boolean a = false;
+		String res = "";
+		for(Compra o : compras){
+			if(o.getId()== id){
+				res = o.toString();
+				a = true;
+			}
+		}
+		if(a == false){
+			throw new Error("Erro na pesquisa de compra: compra nao encontrada na lista.");
+		}
+		return res;
+	}
+
+	public String getItemLista(int posicaoItem) {
+		return compras.get(posicaoItem).toString();
+	}
+
+	public void deletaCompraDaLista(int id) {
+		for(Compra o : compras){
+			if(o.getId() == id){
+				compras.remove(o);
+				break;
+			}
+		}
 	}
 }
