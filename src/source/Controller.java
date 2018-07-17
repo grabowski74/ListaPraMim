@@ -68,33 +68,29 @@ public class Controller {
 		return controllerItens.getItemPorPesquisa(strPesquisada, posicao);
 	}
 
-	public void adicionaListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-
+	public String adicionaListaDeCompras(String descritorLista) {
+		return controllerListas.adicionaListaDeCompras(descritorLista);
 	}
 
 	public String pesquisaListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-		return null;
+		return controllerListas.pesquisaListaDeCompras(descritorLista);
 	}
 
 	public void adicionaCompraALista(String descritorLista, int qnt, int id) {
-		// TODO Auto-generated method stub
-
+		controllerListas.adicionaCompraALista(descritorLista, qnt, controllerItens.getItemPorID(id));
 	}
 
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
-		// TODO Auto-generated method stub
+		controllerListas.finalizarListaDeCompras(descritorLista, localDaCompra, valor);
 
 	}
 
 	public String pesquisaCompraEmLista(String descritorLista, int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return controllerListas.pesquisaCompraEmLista(descritorLista, id);
 	}
 
 	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
-		// TODO Auto-generated method stub
+		controllerListas.atualizaCompraDeLista(descritorLista, id, qnt);
 
 	}
 

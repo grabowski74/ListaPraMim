@@ -1,7 +1,7 @@
 package source;
 /**
  * 
- * Representaçao da classe auxiliar PrecoComparator que implementa a interface nativa
+ * Representaï¿½ao da classe auxiliar PrecoComparator que implementa a interface nativa
 
  * Comparator, cujo a sua funcao e ordenar os itens de acordo com o seu preco.
  * 
@@ -14,10 +14,10 @@ package source;
  */
 import java.util.Comparator;
 
-public class PrecoComparator implements Comparator<Itens> {
+public class PrecoComparator implements Comparator<Item> {
 
 	@Override
-	public int compare(Itens o1, Itens o2) {
+	public int compare(Item o1, Item o2) {
 		if(o1.getPreco() < o2.getPreco()) {
 			return -1;
 		}

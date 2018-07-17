@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Itens {
+public class Item {
 
 	private String nome;
 	private Categoria categoria;
 	private Map<String, Double> precos = new HashMap<String, Double>();
 	private int id;
 
-	public Itens(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
+	public Item(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
 			int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
@@ -26,7 +26,7 @@ public class Itens {
 		this.categoria = new ItemPorQnt(categoria, qnt, unidadeDeMedida);
 	}
 
-	public Itens(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
+	public Item(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
 		validandoEntradasLocal(localDeCompra);
@@ -37,7 +37,7 @@ public class Itens {
 		this.categoria = new ItemPorQuilo(categoria, kg);
 	}
 
-	public Itens(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
+	public Item(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
 		validandoEntradasLocal(localDeCompra);
