@@ -8,34 +8,34 @@ import java.util.List;
 import java.util.Map;
 
 public class ControllerItens {
-	private Itens item;
-	private Map<Integer, Itens> itens;
+	private Item item;
+	private Map<Integer, Item> itens;
 	private int id;
-	private Comparator<Itens> comparador;
+	private Comparator<Item> comparador;
 
 	public ControllerItens() {
-		itens = new HashMap<Integer, Itens>();
+		itens = new HashMap<Integer, Item>();
 		this.id = 1;
 	}
 
 	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
 		
-		item = new Itens(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco, id);
+		item = new Item(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
 		
-		item = new Itens(nome, categoria, kg, localDeCompra, preco, id);
+		item = new Item(nome, categoria, kg, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		
-		item = new Itens(nome, categoria, unidade, localDeCompra, preco, id);
+		item = new Item(nome, categoria, unidade, localDeCompra, preco, id);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
@@ -64,7 +64,7 @@ public class ControllerItens {
 
 	public String getItem(int posicao) {
 		this.comparador = new StringComparator();
-		List<Itens> listaItens = new ArrayList<>();
+		List<Item> listaItens = new ArrayList<>();
 
 		for (int id : itens.keySet()) {
 			listaItens.add(itens.get(id));
@@ -89,7 +89,7 @@ public class ControllerItens {
 			throw new IllegalArgumentException("Erro na listagem de item: categoria nao existe.");
 		}
 		this.comparador = new StringComparator();
-		List<Itens> listaItens = new ArrayList<>();
+		List<Item> listaItens = new ArrayList<>();
 
 		for (int id2 : itens.keySet()) {
 			if (itens.get(id2).getCategoria().equals(categoria)) {
@@ -109,7 +109,7 @@ public class ControllerItens {
 
 	public String getItemPorMenorPreco(int posicao) {
 		this.comparador = new PrecoComparator();
-		List<Itens> OutraListaItens = new ArrayList<>(itens.values());
+		List<Item> OutraListaItens = new ArrayList<>(itens.values());
 		Collections.sort(OutraListaItens, this.comparador);
 		String res = "";
 		for (int i = 0; i < OutraListaItens.size(); i++) {
@@ -122,7 +122,7 @@ public class ControllerItens {
 
 	public String getItemPorPesquisa(String strPesquisada, int posicao) {
 		this.comparador = new StringComparator();
-		List<Itens> listaItens = new ArrayList<>();
+		List<Item> listaItens = new ArrayList<>();
 
 		for (int id2 : itens.keySet()) {
 			for (String str: itens.get(id2).getNome().split(" ")) {
@@ -150,6 +150,10 @@ public class ControllerItens {
 			throw new NullPointerException("Erro na listagem de item: item nao existe.");
 		}
 		return itens.get(id2).toString();
+	}
+	
+	public Item getItemPorID(int id) {
+		return itens.get(id);
 	}
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////

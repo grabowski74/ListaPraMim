@@ -12,8 +12,9 @@ import java.util.Map;
  * @author Gabriel Guimaraes de Almeida
  *
  */
-public class Itens {
-	// Atributo que representa o nome do item.
+
+public class Item {
+
 	private String nome;
 	// Atributo que representa a categoria do item.
 	private Categoria categoria;
@@ -42,7 +43,8 @@ public class Itens {
 	 * @param id
 	 *            O codigo do item.
 	 */
-	public Itens(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
+
+	public Item(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
 			int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
@@ -71,7 +73,9 @@ public class Itens {
 	 * @param id
 	 *            O codigo do item.
 	 */
-	public Itens(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
+
+
+	public Item(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
 		validandoEntradasLocal(localDeCompra);
@@ -98,7 +102,9 @@ public class Itens {
 	 * @param id
 	 *            O codigo do item.
 	 */
-	public Itens(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
+	
+
+	public Item(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
 		validandoEntradasLocal(localDeCompra);

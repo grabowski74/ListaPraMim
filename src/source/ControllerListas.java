@@ -1,35 +1,52 @@
 package source;
 
-public class ControllerListas {
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
-	public void adicionaListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-		
+public class ControllerListas {
+	
+	private Lista listaDeCompras;
+	private Map<String, Lista> mapaDasListas;
+	private Comparator<Lista> comparador;
+	private String ls = System.lineSeparator();
+
+	public ControllerListas() {
+		this.mapaDasListas = new HashMap<>();
+	}
+	
+	public String adicionaListaDeCompras(String descritorLista) {
+		listaDeCompras = new Lista(descritorLista);
+		mapaDasListas.put(descritorLista, listaDeCompras);
+		return descritorLista;
 	}
 
 	public String pesquisaListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-		return null;
+		String aux = "";
+		for (String descritor: mapaDasListas.keySet()) {
+			if (descritor.startsWith(descritorLista)) {
+				aux += descritor;
+			}
+		}
+		return aux;
 	}
 
-	public void adicionaCompraALista(String descritorLista, int qnt, String id) {
-		// TODO Auto-generated method stub
-		
+	public void adicionaCompraALista(String descritorLista, int qnt, Item item) {
+		if (mapaDasListas.containsKey(descritorLista)) {
+			mapaDasListas.get(descritorLista).adicionaCompra(qnt, item);
+		}
 	}
 
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
-		// TODO Auto-generated method stub
-		
+		mapaDasListas.get(descritorLista).finalizaLista(localDaCompra, valor);
 	}
 
-	public String pesquisaCompraEmLista(String descritorLista, String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String pesquisaCompraEmLista(String descritorLista, int id) {
+		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, String id, int qnt) {
-		// TODO Auto-generated method stub
-		
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
+		mapaDasListas.get(descritorLista).atualizaCompra(id, qnt);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
@@ -37,7 +54,7 @@ public class ControllerListas {
 		return null;
 	}
 
-	public void deletaCompraDaLista(String descritorLista, String id) {
+	public void deletaCompraDaLista(String descritorLista, int id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -52,7 +69,7 @@ public class ControllerListas {
 		return null;
 	}
 
-	public String getItemListaPorItem(String id, int posicaoLista) {
+	public String getItemListaPorItem(int id, int posicaoLista) {
 		// TODO Auto-generated method stub
 		return null;
 	}
