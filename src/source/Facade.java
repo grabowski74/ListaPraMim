@@ -78,15 +78,15 @@ public class Facade {
 		return controller.pesquisaCompraEmLista(descritorLista, id);
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
-		controller.atualizaCompraDeLista(descritorLista, id, qnt);
+	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
+		controller.atualizaCompraDeLista(descritorLista, id, qnt, operacao);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
 		return controller.getItemLista(descritorLista, posicaoItem);
 	}
 
-	public void deletaCompraDaLista(String descritorLista, int id) {
+	public void deletaCompraDeLista(String descritorLista, int id) {
 		controller.deletaCompraDaLista(descritorLista, id);
 	}
 

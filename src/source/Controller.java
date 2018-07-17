@@ -89,19 +89,17 @@ public class Controller {
 		return controllerListas.pesquisaCompraEmLista(descritorLista, id);
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, int id, int qnt) {
-		controllerListas.atualizaCompraDeLista(descritorLista, id, qnt);
+	public void atualizaCompraDeLista(String descritorLista, int id, int qnt, String operacao) {
+		controllerListas.atualizaCompraDeLista(descritorLista, id, qnt, operacao);
 
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
-		// TODO Auto-generated method stub
-		return null;
+		return controllerListas.getItemLista(descritorLista, posicaoItem);
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
-		// TODO Auto-generated method stub
-
+		controllerListas.deletaCompraDaLista(descritorLista, id);
 	}
 
 	public String imprimirListaDeCompras(String descritorLista) {

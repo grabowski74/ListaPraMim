@@ -15,11 +15,24 @@ public class Compra {
 	}
 	
 	public String toString() {
-		return this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
+		String res = this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
+		
+		if(this.item.getQnt()!= 0){
+			res += ", " + this.item.getQnt() + " " + this.item.getUnidade();
+		}
+		return res;
 	}
 
-	public void atualiza(int qnt) {
-		this.qnt = qnt;
+	public void atualiza(int qnt, String operacao) {
+		if("adiciona".equals(operacao)){
+			this.qnt += qnt;
+		} else if("diminui".equals(operacao)){
+			this.qnt -= qnt;
+		} 
+	}
+
+	public int getQnt() {
+		return this.qnt;
 	}
 
 	
