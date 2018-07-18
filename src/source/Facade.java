@@ -7,9 +7,8 @@ public class Facade {
 	private Controller controller;
 
 	public static void main(String[] args) {
-		args = new String[] { "source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt",
-				"easyAccept/use_case2_exception.txt", "easyAccept/use_case2.txt", "easyAccept/use_case3_exception.txt",
-				"easyAccept/use_case3.txt" };
+		args = new String[] { "source.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
+				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt", "easyAccept/use_case3_exception.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -28,6 +27,10 @@ public class Facade {
 
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		return controller.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
+	}
+
+	public String exibeItem(int id) {
+		return controller.exibeItem(id);
 	}
 
 	public void atualizaItem(int id, String atributo, String novoValor) {
@@ -79,7 +82,7 @@ public class Facade {
 	}
 
 	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
-		controller.atualizaCompraDeLista(descritorLista, id, qnt, operacao);
+		controller.atualizaCompraDeLista(descritorLista, id, operacao, qnt);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
@@ -100,10 +103,6 @@ public class Facade {
 
 	public String getItemListaPorItem(int id, int posicaoLista) {
 		return controller.getItemListaPorItem(id, posicaoLista);
-	}
-
-	public String exibeItem(int id) {
-		return controller.exibeItem(id);
 	}
 
 }

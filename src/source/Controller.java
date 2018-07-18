@@ -14,26 +14,17 @@ public class Controller {
 
 	public int adiconaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
 			double preco) {
-
-		if (qnt <= 0) {
-			throw new IllegalArgumentException(
-					"Erro no cadastro de item: valor de quantidade nao pode ser menor que zero.");
-		}
-		return controllerItens.adicionaItemPorQtd(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco);
+		return controllerItens.adicionaItemPorQtd(nome, categoria, localDeCompra, preco, qnt, unidadeDeMedida);
 	}
 
 	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		
-		if (kg <= 0) {
-			throw new IllegalArgumentException(
-					"Erro no cadastro de item: valor de quilos nao pode ser menor que zero.");
-		}
-		return controllerItens.adicionaItemPorQuilo(nome, categoria, kg, localDeCompra, preco);
+
+		return controllerItens.adicionaItemPorQuilo(nome, categoria, localDeCompra, preco, kg);
 	}
 
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
-		
-		return controllerItens.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
+
+		return controllerItens.adicionaItemPorUnidade(nome, categoria, localDeCompra, preco, unidade);
 	}
 
 	public void atualizaItem(int id, String atributo, String novoValor) {
@@ -89,9 +80,8 @@ public class Controller {
 		return controllerListas.pesquisaCompraEmLista(descritorLista, id);
 	}
 
-	public void atualizaCompraDeLista(String descritorLista, int id, int qnt, String operacao) {
-		controllerListas.atualizaCompraDeLista(descritorLista, id, qnt, operacao);
-
+	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
+		controllerListas.atualizaCompraDeLista(descritorLista, id, operacao, qnt);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {

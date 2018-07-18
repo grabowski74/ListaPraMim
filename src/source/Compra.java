@@ -13,15 +13,24 @@ public class Compra {
 	public int getId() {
 		return this.item.getId();
 	}
+
+	public void atualiza(String operacao, int qnt) {
+		if (operacao.equals("adiciona")) {
+			this.qnt += qnt;
+		} else {
+			this.qnt -= qnt;
+		}
+	}
 	
 	public String toString() {
-		String res = this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
-		
-		if(this.item.getQnt()!= 0){
-			res += ", " + this.item.getQnt() + " " + this.item.getUnidade();
+
+		String res =  this.qnt + " " + item.getNome() + ", " + item.getCategoria() + ", ";
+		if (item instanceof ItemPorQnt) {
+			res += ((ItemPorQnt) item).getQuantidade() + " " + ((ItemPorQnt) item).getUnidadeDeMedida();
 		}
 		return res;
 	}
+
 
 	public void atualiza(int qnt, String operacao) {
 		if("adiciona".equals(operacao)){
@@ -30,6 +39,7 @@ public class Compra {
 			this.qnt -= qnt;
 		} 
 	}
+
 
 	public int getQnt() {
 		return this.qnt;

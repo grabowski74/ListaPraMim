@@ -11,6 +11,7 @@ public class Lista {
 	private List<Compra> compras;
 
 	public Lista(String descritor) {
+		validandoEntradaDescritor(descritor);
 		compras = new ArrayList<>();
 	}
 
@@ -25,44 +26,41 @@ public class Lista {
 
 	}
 
-	public void atualizaCompra(int id, int qnt, String operacao) {
-		
+	public void atualizaCompra(int id, String operacao, int qnt) {
+		boolean aux = false;
+		Compra comp = null;
 		for (Compra compra: compras) {
 			if (compra.getId() == id) {
-				compra.atualiza(qnt, operacao);
-				if(compra.getQnt() < 1){
-					compras.remove(compra);
-					break;
+				aux = true;
+				compra.atualiza(operacao, qnt);
+				if (compra.getQnt() == 0) {
+					comp = compra;
 				}
 			}
+		}
+		compras.remove(comp);
+		if (aux == false) {
+			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
 	}
 
 	public String pesquisa(int id) {
-		boolean a = false;
-		String res = "";
-		for(Compra o : compras){
-			if(o.getId()== id){
-				res = o.toString();
-				a = true;
+		for (Compra compra: compras) {
+			if(compra.getId() == id) {
+				return compra.toString();
 			}
 		}
-		if(a == false){
-			throw new Error("Erro na pesquisa de compra: compra nao encontrada na lista.");
+		throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
+	}
+	
+	private void validandoEntradaDescritor(String descritor) {
+		if (descritor.equals(null) || descritor.trim().equals("")) {
+			throw new NullPointerException("Erro na criacao de lista de compras: descritor nao pode ser vazio ou nulo.");
 		}
-		return res;
+		
 	}
 
-	public String getItemLista(int posicaoItem) {
+	public String getItem(int posicaoItem) {
 		return compras.get(posicaoItem).toString();
-	}
-
-	public void deletaCompraDaLista(int id) {
-		for(Compra o : compras){
-			if(o.getId() == id){
-				compras.remove(o);
-				break;
-			}
-		}
 	}
 }
