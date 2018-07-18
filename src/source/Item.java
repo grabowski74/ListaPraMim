@@ -13,107 +13,29 @@ import java.util.Map;
  *
  */
 
-public class Item {
+public abstract class Item {
 
-	private String nome;
-	// Atributo que representa a categoria do item.
-	private Categoria categoria;
+	protected String nome;
 	// Atributo que representa uma lista com todos os precos dos varios
 	// supermercados que possuem esse tipo de produto.
 	private Map<String, Double> precos = new HashMap<String, Double>();
 	// Atributo que representa o cógigo do produto.
-	private int id;
+	protected int id;
+	protected String categoria;
+	protected String localDeCompra;
+	protected double preco;
 
-	/**
-	 * Construtor da classe item. Este representa a criacao de um item por
-	 * quantidade.
-	 * 
-	 * @param nome
-	 *            O nome do item.
-	 * @param categoria
-	 *            A categoria do item.
-	 * @param qnt
-	 *            Quanto desse produto será colocado no carrinho.
-	 * @param unidadeDeMedida
-	 *            A unidade de medida da quantidade desse item.
-	 * @param localDeCompra
-	 *            O nome do supermercado em que o item foi registrado.
-	 * @param preco
-	 *            Preco do item no supermercado em que o produto foi cadastrado.
-	 * @param id
-	 *            O codigo do item.
-	 */
-
-	public Item(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra, double preco,
-			int id) {
-		validandoEntradasNome(nome);
-		validandoEntradasCategoria(categoria);
-		validandoEntradasLocal(localDeCompra);
-		validandoEntradasPreco(preco);
-		validandoEntradasUnidadeMedida(unidadeDeMedida);
-		this.id = id;
-		this.nome = nome;
-		this.precos.put(localDeCompra, preco);
-		this.categoria = new ItemPorQnt(categoria, qnt, unidadeDeMedida);
-	}
-
-	/**
-	 * Construtor da classe item. Este representa a criacao de um item por quilo.
-	 * 
-	 * @param nome
-	 *            O nome do item.
-	 * @param categoria
-	 *            A categoria do item.
-	 * @param kg
-	 *            A quantidade do item em quilos.
-	 * @param localDeCompra
-	 *            O nome do supermercado em que o item foi registrado.
-	 * @param preco
-	 *            Preco do item no supermercado em que o produto foi cadastrado.
-	 * @param id
-	 *            O codigo do item.
-	 */
-
-
-	public Item(String nome, String categoria, double kg, String localDeCompra, double preco, int id) {
+	public Item(String nome, String categoria, String localDeCompra, double preco, int id) {
 		validandoEntradasNome(nome);
 		validandoEntradasCategoria(categoria);
 		validandoEntradasLocal(localDeCompra);
 		validandoEntradasPreco(preco);
 		this.id = id;
 		this.nome = nome;
-		this.precos.put(localDeCompra, preco);
-		this.categoria = new ItemPorQuilo(categoria, kg);
-	}
-
-	/**
-	 * Construtor da classe item. Este representa a criacao de um item por unidade.
-	 * 
-	 * @param nome
-	 *            O nome do item.
-	 * @param categoria
-	 *            A categoria do item.
-	 * @param unidade
-	 *            O número de itens a serem colocados na lista de compras.
-	 * @param localDeCompra
-	 *            O nome do supermercado em que o item foi registrado.
-	 * @param preco
-	 *            Preco do item no supermercado em que o produto foi cadastrado.
-	 * @param id
-	 *            O codigo do item.
-	 */
-	
-
-	public Item(String nome, String categoria, int unidade, String localDeCompra, double preco, int id) {
-		validandoEntradasNome(nome);
-		validandoEntradasCategoria(categoria);
-		validandoEntradasLocal(localDeCompra);
-		validandoEntradasPreco(preco);
-		validandoEntradasValorUnidade(unidade);
-		this.id = id;
-		this.nome = nome;
-		this.precos.put(localDeCompra, preco);
-		this.categoria = new ItemPorUnidade(categoria, unidade);
+		this.categoria = categoria;
+		this.localDeCompra = localDeCompra;
+		this.preco = preco;
+		adicionaPrecoItem(localDeCompra, preco);
 	}
 
 	public int getId() {
@@ -129,14 +51,7 @@ public class Item {
 	}
 
 	public String toString() {
-		if (this.categoria instanceof ItemPorQnt) {
-			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", " + this.categoria.getQuantidade()
-					+ " " + this.categoria.getUnidadeDeMedida() + ", Preco: " + getListaPrecos();
-		} else if (this.categoria instanceof ItemPorQuilo) {
-			return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco por quilo: "
-					+ getListaPrecos();
-		}
-		return this.id + ". " + this.nome + ", " + categoria.getCategoria() + ", Preco: " + getListaPrecos();
+		return null;
 	}
 
 	protected String getListaPrecos() {
@@ -148,15 +63,16 @@ public class Item {
 	}
 
 	public String getCategoria() {
-		return categoria.getCategoria();
+		return categoria;
 	}
 
 	public void atualizaItem(String atributo, String novoValor) {
 		if ("nome".equals(atributo)) {
 			this.nome = novoValor;
 		}
-		this.categoria.atualizaItem(atributo, novoValor);
-
+		if ("categoria".equals(atributo)) {
+			this.categoria = novoValor;
+		}
 	}
 
 	public String getNome() {
@@ -171,13 +87,6 @@ public class Item {
 	}
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
-
-	private void validandoEntradasUnidadeMedida(String unidadeDeMedida) {
-		if (unidadeDeMedida.equals(null) || unidadeDeMedida.trim().equals("")) {
-			throw new NullPointerException("Erro no cadastro de item: unidade de medida nao pode ser vazia ou nula.");
-		}
-
-	}
 
 	private void validandoEntradasPreco(double preco) {
 		if (preco <= 0) {
@@ -196,9 +105,7 @@ public class Item {
 	private void validandoEntradasCategoria(String categoria) {
 		if (categoria.equals(null) || categoria.trim().equals("")) {
 			throw new NullPointerException("Erro no cadastro de item: categoria nao pode ser vazia ou nula.");
-		}
-
-		if (!categoria.equals("limpeza") && !categoria.equals("alimento industrializado")
+		} else if (!categoria.equals("limpeza") && !categoria.equals("alimento industrializado")
 				&& !categoria.equals("alimento nao industrializado") && !categoria.equals("higiene pessoal")) {
 			throw new IllegalArgumentException("Erro no cadastro de item: categoria nao existe.");
 		}
@@ -211,12 +118,5 @@ public class Item {
 		}
 	}
 
-	private void validandoEntradasValorUnidade(int unidade) {
-		if (unidade < 0) {
-			throw new IllegalArgumentException(
-					"Erro no cadastro de item: valor de unidade nao pode ser menor que zero.");
-		}
-
-	}
 
 }

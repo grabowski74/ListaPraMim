@@ -13,13 +13,25 @@ public class Compra {
 	public int getId() {
 		return this.item.getId();
 	}
+
+	public void atualiza(String operacao, int qnt) {
+		if (operacao.equals("adiciona")) {
+			this.qnt += qnt;
+		} else {
+			this.qnt -= qnt;
+		}
+	}
 	
 	public String toString() {
-		return this.qnt + " " + this.item.getNome() + ", " + this.item.getCategoria();
+		String res =  this.qnt + " " + item.getNome() + ", " + item.getCategoria() + ", ";
+		if (item instanceof ItemPorQnt) {
+			res += ((ItemPorQnt) item).getQuantidade() + " " + ((ItemPorQnt) item).getUnidadeDeMedida();
+		}
+		return res;
 	}
 
-	public void atualiza(int qnt) {
-		this.qnt = qnt;
+	public int getQnt() {
+		return this.qnt;
 	}
 
 	
