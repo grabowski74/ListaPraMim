@@ -82,7 +82,6 @@ public class Controller {
 
 	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
 		controllerListas.atualizaCompraDeLista(descritorLista, id, operacao, qnt);
-
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
@@ -90,8 +89,7 @@ public class Controller {
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
-		// TODO Auto-generated method stub
-
+		controllerListas.deletaCompraDaLista(descritorLista, id);
 	}
 
 	public String imprimirListaDeCompras(String descritorLista) {

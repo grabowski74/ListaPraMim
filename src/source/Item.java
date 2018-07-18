@@ -85,6 +85,14 @@ public abstract class Item {
 		return Collections.min(listPrecos);
 
 	}
+	
+	public String getUnidade(){
+		return categoria.getUnidadeDeMedida();
+	}
+	
+	public int getQnt(){
+		return categoria.getQuantidade();
+	}
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
 

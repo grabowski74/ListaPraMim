@@ -89,7 +89,7 @@ public class Facade {
 		return controller.getItemLista(descritorLista, posicaoItem);
 	}
 
-	public void deletaCompraDaLista(String descritorLista, int id) {
+	public void deletaCompraDeLista(String descritorLista, int id) {
 		controller.deletaCompraDaLista(descritorLista, id);
 	}
 
