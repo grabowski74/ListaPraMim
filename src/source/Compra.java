@@ -24,9 +24,9 @@ public class Compra {
 	
 	public String toString() {
 
-		String res =  this.qnt + " " + item.getNome() + ", " + item.getCategoria() + ", ";
+		String res =  this.qnt + " " + item.getNome() + ", " + item.getCategoria();
 		if (item instanceof ItemPorQnt) {
-			res += ((ItemPorQnt) item).getQuantidade() + " " + ((ItemPorQnt) item).getUnidadeDeMedida();
+			res += ", " + ((ItemPorQnt) item).getQuantidade() + " " + ((ItemPorQnt) item).getUnidadeDeMedida();
 		}
 		return res;
 	}
@@ -43,6 +43,14 @@ public class Compra {
 
 	public int getQnt() {
 		return this.qnt;
+	}
+	
+	public String getCategoria() {
+		return this.item.getCategoria();
+	}
+	
+	public String getNome() {
+		return this.item.getNome();
 	}
 
 	

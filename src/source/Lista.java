@@ -2,6 +2,8 @@ package source;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Lista {
 
@@ -9,6 +11,7 @@ public class Lista {
 	private int valor;
 	private Compra compra;
 	private List<Compra> compras;
+	private Comparator<Compra> comparador;
 
 	public Lista(String descritor) {
 		validandoEntradaDescritor(descritor);
@@ -18,6 +21,8 @@ public class Lista {
 	public void adicionaCompra(int qnt, Item item) {
 		compra = new Compra(qnt, item);
 		compras.add(compra);
+		this.comparador = new OrdenadorLista();
+		Collections.sort(compras, comparador);
 	}
 
 	public void finalizaLista(String localDaCompra, int valor) {
@@ -36,9 +41,10 @@ public class Lista {
 				if (compra.getQnt() == 0) {
 					comp = compra;
 				}
+				compras.remove(comp);
+				break;
 			}
 		}
-		compras.remove(comp);
 		if (aux == false) {
 			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
@@ -61,6 +67,19 @@ public class Lista {
 	}
 
 	public String getItem(int posicaoItem) {
+		if(posicaoItem >= compras.size()){
+			return "";
+		}
 		return compras.get(posicaoItem).toString();
+	}
+
+	public void deleta(int id) {
+		for (Compra compra: compras) {
+			if(compra.getId() == id) {
+				compras.remove(compra);
+				break;
+			}
+		}
+		
 	}
 }
