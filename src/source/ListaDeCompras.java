@@ -11,7 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 
-public class Lista{
+public class ListaDeCompras{
 
 	private String localDeCompra;
 	private String descritor;
@@ -24,7 +24,7 @@ public class Lista{
 	private String hora;
 
 
-	public Lista(String descritor) {
+	public ListaDeCompras(String descritor) {
 		validandoEntradaDescritor(descritor);
 		this.descritor = descritor;
 		compras = new ArrayList<>();

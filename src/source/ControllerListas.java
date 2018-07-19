@@ -8,15 +8,15 @@ import java.util.Map;
 
 public class ControllerListas {
 
-	private Lista listaDeCompras;
-	private Map<String, Lista> mapaDasListas;
+	private ListaDeCompras listaDeCompras;
+	private Map<String, ListaDeCompras> mapaDasListas;
 
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();
 	}
 
 	public String adicionaListaDeCompras(String descritorLista) {
-		listaDeCompras = new Lista(descritorLista);
+		listaDeCompras = new ListaDeCompras(descritorLista);
 		mapaDasListas.put(descritorLista, listaDeCompras);
 		return descritorLista;
 	}
@@ -80,7 +80,7 @@ public class ControllerListas {
 
 	public String getItemListaPorData(String data, int posicao) {
 		List<String> listas = new ArrayList<>();
-		for (Lista lista : mapaDasListas.values()) {
+		for (ListaDeCompras lista : mapaDasListas.values()) {
 			if (data.equals(lista.getData()) && !listas.contains(lista.getDescritor())) {
 				listas.add(lista.getDescritor());
 			}
