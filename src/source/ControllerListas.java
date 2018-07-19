@@ -38,10 +38,25 @@ public class ControllerListas {
 	}
 
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
+		if(descritorLista.equals(null) || descritorLista.trim().equals("")) {
+			throw new NullPointerException("Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		}
+		if(localDaCompra.equals(null) || localDaCompra.trim().equals("")) {
+			throw new NullPointerException("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo.");
+		}
+		if(valor <= 0) {
+			throw new IllegalArgumentException("Erro na finalizacao de lista de compras: valor final da lista invalido.");
+		}
 		mapaDasListas.get(descritorLista).finalizaLista(localDaCompra, valor);
 	}
 
 	public String pesquisaCompraEmLista(String descritorLista, int id) {
+		if (id <0) {
+			throw new IllegalArgumentException("Erro na pesquisa de compra: item id invalido.");
+		}
+		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
+			throw new NullPointerException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
 		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
 
@@ -55,6 +70,9 @@ public class ControllerListas {
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
+		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
+			throw new NullPointerException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
+		}
 		mapaDasListas.get(descritorLista).deleta(id);
 	}
 

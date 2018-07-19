@@ -68,6 +68,11 @@ public class Controller {
 	}
 
 	public void adicionaCompraALista(String descritorLista, int qnt, int id) {
+		try {
+			controllerItens.getItemPorID(id);
+		} catch (Exception r) {
+			throw new NullPointerException("Erro na compra de item:" + r.getMessage());
+		}
 		controllerListas.adicionaCompraALista(descritorLista, qnt, controllerItens.getItemPorID(id));
 	}
 
@@ -89,6 +94,11 @@ public class Controller {
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
+		try {
+			controllerItens.getItemPorID(id);
+		} catch(Exception r) {
+			throw new NullPointerException("Erro na exclusao de compra:" + r.getMessage());
+		}
 		controllerListas.deletaCompraDaLista(descritorLista, id);
 	}
 

@@ -153,6 +153,9 @@ public class ControllerItens {
 	}
 	
 	public Item getItemPorID(int id) {
+		if(!itens.containsKey(id)) {
+			throw new NullPointerException(" item nao existe no sistema.");
+		}
 		return itens.get(id);
 	}
 
