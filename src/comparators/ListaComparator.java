@@ -3,7 +3,7 @@ import java.util.Comparator;
 
 import entidades.Compra;
 
-public class OrdenadorLista implements Comparator<Compra>{
+public class ListaComparator implements Comparator<Compra>{
 
 	@Override
 	public int compare(Compra o1, Compra o2) {

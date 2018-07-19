@@ -1,23 +1,28 @@
 package controllers;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import comparators.StringComparatorListas;
 import entidades.ListaDeCompras;
 import entidadesItem.Item;
 
 public class ControllerListas {
 
-
 	private ListaDeCompras listaDeCompras;
 	private Map<String, ListaDeCompras> mapaDasListas;
-
+	private Comparator<String> comparador;
+	private String data;
 
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();
+		data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
 
 	public String adicionaListaDeCompras(String descritorLista) {
@@ -27,10 +32,17 @@ public class ControllerListas {
 	}
 
 	public String pesquisaListaDeCompras(String descritorLista) {
+		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
+			throw new NullPointerException("Erro na pesquisa de compra: descritor nao pode ser vazio ou nulo.");
+		}
+		if (!mapaDasListas.containsKey(descritorLista)) {
+			throw new NullPointerException("Erro na pesquisa de compra: lista de compras nao existe.");
+		}
+		
 		String aux = "";
 		for (String descritor : mapaDasListas.keySet()) {
 			if (descritor.startsWith(descritorLista)) {
-				aux += descritor;
+				aux = descritor;
 			}
 		}
 		return aux;
@@ -84,21 +96,68 @@ public class ControllerListas {
 	}
 
 	public String getItemListaPorData(String data, int posicao) {
+		this.comparador = new StringComparatorListas();
 		List<String> listas = new ArrayList<>();
 		for (ListaDeCompras lista : mapaDasListas.values()) {
 			if (data.equals(lista.getData()) && !listas.contains(lista.getDescritor())) {
 				listas.add(lista.getDescritor());
 			}
 		}
-		
-		Collections.sort(listas);
-		
+
+		Collections.sort(listas, comparador);
+
 		return listas.get(posicao);
 	}
 
 	public String getItemListaPorItem(int id, int posicaoLista) {
-		// TODO Auto-generated method stub
-		return null;
+		this.comparador = new StringComparatorListas();
+		List<String> listas = new ArrayList<>();
+		for (ListaDeCompras lista : mapaDasListas.values()) {
+			if (lista.contemItem(id)) {
+				listas.add(lista.getDescritor());
+			}
+		}
+		
+		Collections.sort(listas, comparador);
+		
+		return mapaDasListas.get(listas.get(posicaoLista)).getData() + " - " + listas.get(posicaoLista);
+	}
+
+	public String pesquisaListaDeComprasPorData(String data) {
+		if (data.equals(null) || data.trim().equals("")) {
+			throw new NullPointerException("Erro na pesquisa de compra: data nao pode ser vazia ou nula.");
+		}
+		if (!data.matches(this.data)) {
+			throw new IllegalArgumentException("Erro na pesquisa de compra: data em formato invalido, tente dd/MM/yyyy");
+		}
+		this.comparador = new StringComparatorListas();
+		List<String> listas = new ArrayList<>();
+		for (ListaDeCompras lista : mapaDasListas.values()) {
+			if (data.equals(lista.getData()) && !listas.contains(lista.getDescritor())) {
+				listas.add(lista.getDescritor());
+			}
+		}
+
+		Collections.sort(listas, comparador);
+		return listas.toString();
+	}
+
+	public String pesquisaListaDeComprasPorItem(int id) {
+		this.comparador = new StringComparatorListas();
+		List<String> listas = new ArrayList<>();
+		for (ListaDeCompras lista : mapaDasListas.values()) {
+			if (lista.contemItem(id)) {
+				listas.add(lista.getDescritor());
+			}
+		}
+		
+		if (listas.size() == 0) {
+			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
+		}
+		
+		Collections.sort(listas, comparador);
+		
+		return listas.toString();
 	}
 
 }

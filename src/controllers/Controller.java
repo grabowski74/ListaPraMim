@@ -107,7 +107,15 @@ public class Controller {
 	}
 
 	public String getItemListaPorItem(int id, int posicaoLista) {
-		// TODO Auto-generated method stub
-		return null;
+		return controllerListas.getItemListaPorItem(id, posicaoLista);
 	}
+
+	public String pesquisaListaDeComprasPorData(String data) {
+		return controllerListas.pesquisaListaDeComprasPorData(data);
+	}
+
+	public String pesquisaListaDeComprasPorItem(int id) {
+		return controllerListas.pesquisaListaDeComprasPorItem(id);
+	}
+
 }

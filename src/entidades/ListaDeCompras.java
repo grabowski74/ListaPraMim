@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import comparators.OrdenadorLista;
+import comparators.ListaComparator;
 import entidadesItem.Item;
 
 import java.util.Collections;
@@ -36,11 +36,11 @@ public class ListaDeCompras{
 	}
 
 	public void adicionaCompra(int qnt, Item item) {
-		comparador = new OrdenadorLista();
+		comparador = new ListaComparator();
 		
 		compra = new Compra(qnt, item);
 		compras.add(compra);
-		this.comparador = new OrdenadorLista();
+		this.comparador = new ListaComparator();
 		Collections.sort(compras, comparador);
 
 	}
@@ -119,6 +119,15 @@ public class ListaDeCompras{
 
 	public String getDescritor() {
 		return this.descritor;
+	}
+	
+	public boolean contemItem(int id) {
+		for (Compra compra: compras) {
+			if(compra.getId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -109,5 +109,13 @@ public class Facade {
 	public String dataAtual() {
 		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
+	
+	public String pesquisaListasDeComprasPorData(String data) {
+		return controller.pesquisaListaDeComprasPorData(data);
+	}
+	
+	public String pesquisaListasDeComprasPorItem(int id) {
+		return controller.pesquisaListaDeComprasPorItem(id);
+	}
 
 }
