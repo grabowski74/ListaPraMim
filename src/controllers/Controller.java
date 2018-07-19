@@ -1,7 +1,4 @@
-package source;
-
-import controllers.ControllerItens;
-import controllers.ControllerListas;
+package controllers;
 
 public class Controller {
 

@@ -1,5 +1,6 @@
 package entidades;
 
+import entidadesItem.Item;
 import entidadesItem.ItemPorQnt;
 
 

@@ -1,4 +1,4 @@
-package source;
+package controllers;
 
 import easyaccept.EasyAccept;
 import java.util.Date;
@@ -10,7 +10,7 @@ public class Facade {
 	private Controller controller;
 
 	public static void main(String[] args) {
-		args = new String[] { "source.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
+		args = new String[] { "controllers.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
 				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
 				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
 				"easyAccept/use_case4_exception.txt" };

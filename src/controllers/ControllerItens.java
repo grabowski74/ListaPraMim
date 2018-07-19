@@ -9,7 +9,7 @@ import java.util.Map;
 
 import comparators.PrecoComparator;
 import comparators.StringComparator;
-import entidades.Item;
+import entidadesItem.Item;
 import entidadesItem.ItemPorQnt;
 import entidadesItem.ItemPorQuilo;
 import entidadesItem.ItemPorUnidade;

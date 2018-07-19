@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import entidades.Item;
-import source.ListaDeCompras;
+import entidades.ListaDeCompras;
+import entidadesItem.Item;
 
 public class ControllerListas {
 

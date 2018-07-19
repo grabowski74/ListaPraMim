@@ -1,4 +1,4 @@
-package entidades;
+package entidadesItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
