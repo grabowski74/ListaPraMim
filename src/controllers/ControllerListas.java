@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import entidades.Item;
-import entidades.Lista;
+import entidades.ListaDeCompras;
 
 public class ControllerListas {
 	
-	private Lista listaDeCompras;
-	private Map<String, Lista> mapaDasListas;
-	private Comparator<Lista> comparador;
+	private ListaDeCompras listaDeCompras;
+	private Map<String, ListaDeCompras> mapaDasListas;
+	private Comparator<ListaDeCompras> comparador;
 	private String ls = System.lineSeparator();
 
 	public ControllerListas() {
@@ -19,7 +19,7 @@ public class ControllerListas {
 	}
 	
 	public String adicionaListaDeCompras(String descritorLista) {
-		listaDeCompras = new Lista(descritorLista);
+		listaDeCompras = new ListaDeCompras(descritorLista);
 		mapaDasListas.put(descritorLista, listaDeCompras);
 		return descritorLista;
 	}

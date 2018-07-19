@@ -8,7 +8,7 @@ import comparators.OrdenadorLista;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Lista {
+public class ListaDeCompras {
 
 	private String localDeCompra;
 	private int valor;
@@ -16,7 +16,7 @@ public class Lista {
 	private List<Compra> compras;
 	private Comparator<Compra> comparador;
 
-	public Lista(String descritor) {
+	public ListaDeCompras(String descritor) {
 		validandoEntradaDescritor(descritor);
 		compras = new ArrayList<>();
 	}
