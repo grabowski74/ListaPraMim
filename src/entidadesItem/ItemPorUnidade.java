@@ -1,4 +1,6 @@
-package source;
+package entidadesItem;
+
+import entidades.Item;
 
 /**
  * 
