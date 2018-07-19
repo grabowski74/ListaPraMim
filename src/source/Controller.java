@@ -102,14 +102,8 @@ public class Controller {
 		controllerListas.deletaCompraDaLista(descritorLista, id);
 	}
 
-	public String imprimirListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public String getItemListaPorData(String data, int posicao) {
-		// TODO Auto-generated method stub
-		return null;
+		return controllerListas.getItemListaPorData(data, posicao);
 	}
 
 	public String getItemListaPorItem(int id, int posicaoLista) {

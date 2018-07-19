@@ -1,20 +1,20 @@
 package source;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerListas {
-	
+
 	private Lista listaDeCompras;
 	private Map<String, Lista> mapaDasListas;
-	private Comparator<Lista> comparador;
-	private String ls = System.lineSeparator();
 
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();
 	}
-	
+
 	public String adicionaListaDeCompras(String descritorLista) {
 		listaDeCompras = new Lista(descritorLista);
 		mapaDasListas.put(descritorLista, listaDeCompras);
@@ -23,7 +23,7 @@ public class ControllerListas {
 
 	public String pesquisaListaDeCompras(String descritorLista) {
 		String aux = "";
-		for (String descritor: mapaDasListas.keySet()) {
+		for (String descritor : mapaDasListas.keySet()) {
 			if (descritor.startsWith(descritorLista)) {
 				aux += descritor;
 			}
@@ -38,20 +38,23 @@ public class ControllerListas {
 	}
 
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
-		if(descritorLista.equals(null) || descritorLista.trim().equals("")) {
-			throw new NullPointerException("Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
+		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
+			throw new NullPointerException(
+					"Erro na finalizacao de lista de compras: descritor nao pode ser vazio ou nulo.");
 		}
-		if(localDaCompra.equals(null) || localDaCompra.trim().equals("")) {
-			throw new NullPointerException("Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo.");
+		if (localDaCompra.equals(null) || localDaCompra.trim().equals("")) {
+			throw new NullPointerException(
+					"Erro na finalizacao de lista de compras: local nao pode ser vazio ou nulo.");
 		}
-		if(valor <= 0) {
-			throw new IllegalArgumentException("Erro na finalizacao de lista de compras: valor final da lista invalido.");
+		if (valor <= 0) {
+			throw new IllegalArgumentException(
+					"Erro na finalizacao de lista de compras: valor final da lista invalido.");
 		}
 		mapaDasListas.get(descritorLista).finalizaLista(localDaCompra, valor);
 	}
 
 	public String pesquisaCompraEmLista(String descritorLista, int id) {
-		if (id <0) {
+		if (id < 0) {
 			throw new IllegalArgumentException("Erro na pesquisa de compra: item id invalido.");
 		}
 		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
@@ -59,7 +62,6 @@ public class ControllerListas {
 		}
 		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
-
 
 	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
 		mapaDasListas.get(descritorLista).atualizaCompra(id, operacao, qnt);
@@ -76,14 +78,17 @@ public class ControllerListas {
 		mapaDasListas.get(descritorLista).deleta(id);
 	}
 
-	public String imprimirListaDeCompras(String descritorLista) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public String getItemListaPorData(String data, int posicao) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> listas = new ArrayList<>();
+		for (Lista lista : mapaDasListas.values()) {
+			if (data.equals(lista.getData()) && !listas.contains(lista.getDescritor())) {
+				listas.add(lista.getDescritor());
+			}
+		}
+		
+		Collections.sort(listas);
+		
+		return listas.get(posicao);
 	}
 
 	public String getItemListaPorItem(int id, int posicaoLista) {
