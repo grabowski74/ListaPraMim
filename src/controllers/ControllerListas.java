@@ -1,4 +1,4 @@
-package source;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,10 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import entidades.Item;
+import source.ListaDeCompras;
+
 public class ControllerListas {
+
 
 	private ListaDeCompras listaDeCompras;
 	private Map<String, ListaDeCompras> mapaDasListas;
+
 
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();

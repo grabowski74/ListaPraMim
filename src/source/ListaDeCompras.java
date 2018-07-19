@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import comparators.OrdenadorLista;
+import entidades.Compra;
+import entidades.Item;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;

@@ -1,5 +1,8 @@
 package source;
 
+import controllers.ControllerItens;
+import controllers.ControllerListas;
+
 public class Controller {
 
 	private ControllerItens controllerItens;

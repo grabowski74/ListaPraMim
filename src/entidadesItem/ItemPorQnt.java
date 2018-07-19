@@ -1,4 +1,7 @@
-package source;
+package entidadesItem;
+
+import entidades.Item;
+
 /**
  * 
  * Representa�ao da classe dos itens instanciados de acordo com a sua quantidade.

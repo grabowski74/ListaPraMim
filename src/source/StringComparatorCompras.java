@@ -2,6 +2,8 @@ package source;
 
 import java.util.Comparator;
 
+import entidades.Compra;
+
 public class StringComparatorCompras implements Comparator<Compra> {
 
 	@Override

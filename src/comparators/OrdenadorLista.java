@@ -1,7 +1,7 @@
-package source;
+package comparators;
 import java.util.Comparator;
 
-import source.Compra;
+import entidades.Compra;
 
 public class OrdenadorLista implements Comparator<Compra>{
 
