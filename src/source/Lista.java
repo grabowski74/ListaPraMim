@@ -32,6 +32,9 @@ public class Lista {
 	}
 
 	public void atualizaCompra(int id, String operacao, int qnt) {
+		if(!operacao.equals("adiciona") && !operacao.equals("diminui")) {
+			throw new IllegalArgumentException("Erro na atualizacao de compra: operacao invalida para atualizacao.");
+		}
 		boolean aux = false;
 		Compra comp = null;
 		for (Compra compra: compras) {
@@ -46,7 +49,7 @@ public class Lista {
 			}
 		}
 		if (aux == false) {
-			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
+			throw new NullPointerException("Erro na atualizacao de compra: compra nao encontrada na lista.");
 		}
 	}
 
@@ -74,11 +77,16 @@ public class Lista {
 	}
 
 	public void deleta(int id) {
+		boolean aux = false;
 		for (Compra compra: compras) {
 			if(compra.getId() == id) {
 				compras.remove(compra);
+				aux = true;
 				break;
 			}
+		}
+		if(aux == false) {
+			throw new NullPointerException("Erro na exclusao de compra: compra nao encontrada na lista.");
 		}
 		
 	}
