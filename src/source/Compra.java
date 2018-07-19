@@ -1,5 +1,6 @@
 package source;
 
+
 public class Compra {
 
 	private int qnt;
@@ -27,6 +28,7 @@ public class Compra {
 		String res = this.qnt + " " + item.getNome() + ", " + item.getCategoria();
 		if (item instanceof ItemPorQnt) {
 			res += ", " + ((ItemPorQnt) item).getQuantidade() + " " + ((ItemPorQnt) item).getUnidadeDeMedida();
+
 		}
 		return res;
 	}
@@ -50,5 +52,4 @@ public class Compra {
 	public String getNome() {
 		return this.item.getNome();
 	}
-
 }

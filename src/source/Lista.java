@@ -1,6 +1,8 @@
 package source;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +10,8 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class Lista {
+
+public class Lista{
 
 	private String localDeCompra;
 	private String descritor;
@@ -20,6 +23,7 @@ public class Lista {
 	private String data;
 	private String hora;
 
+
 	public Lista(String descritor) {
 		validandoEntradaDescritor(descritor);
 		this.descritor = descritor;
@@ -29,10 +33,13 @@ public class Lista {
 	}
 
 	public void adicionaCompra(int qnt, Item item) {
+		comparador = new OrdenadorLista();
+		
 		compra = new Compra(qnt, item);
 		compras.add(compra);
 		this.comparador = new OrdenadorLista();
 		Collections.sort(compras, comparador);
+
 	}
 
 	public void finalizaLista(String localDaCompra, int valor) {
@@ -64,6 +71,7 @@ public class Lista {
 	}
 
 	public String pesquisa(int id) {
+
 		for (Compra compra : compras) {
 			if (compra.getId() == id) {
 				return compra.toString();

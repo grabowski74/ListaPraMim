@@ -1,7 +1,7 @@
 package source;
 /**
  * 
- * Representa�ao da classe auxiliar StringComparator que implementa a interface nativa
+ * Representacao da classe auxiliar StringComparator que implementa a interface nativa
 
  * Comparator, cujo a sua funcao e ordenar os itens de acordo com o seu nome.
  * 
