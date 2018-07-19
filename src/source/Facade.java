@@ -1,15 +1,19 @@
 package source;
 
 import easyaccept.EasyAccept;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Facade {
 
 	private Controller controller;
 
 	public static void main(String[] args) {
-		args = new String[] { "source.Facade", "easyAccept/use_case1_exception.txt", "easyAccept/use_case1.txt",
-				"easyAccept/use_case2_exception.txt", "easyAccept/use_case2.txt", "easyAccept/use_case3_exception.txt",
-				"easyAccept/use_case3.txt" };
+		args = new String[] { "source.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
+				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
+				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
+				"easyAccept/use_case4_exception.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -28,6 +32,10 @@ public class Facade {
 
 	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
 		return controller.adicionaItemPorUnidade(nome, categoria, unidade, localDeCompra, preco);
+	}
+
+	public String exibeItem(int id) {
+		return controller.exibeItem(id);
 	}
 
 	public void atualizaItem(int id, String atributo, String novoValor) {
@@ -79,7 +87,7 @@ public class Facade {
 	}
 
 	public void atualizaCompraDeLista(String descritorLista, int id, String operacao, int qnt) {
-		controller.atualizaCompraDeLista(descritorLista, id, qnt, operacao);
+		controller.atualizaCompraDeLista(descritorLista, id, operacao, qnt);
 	}
 
 	public String getItemLista(String descritorLista, int posicaoItem) {
@@ -90,10 +98,6 @@ public class Facade {
 		controller.deletaCompraDaLista(descritorLista, id);
 	}
 
-	public String imprimirListaDeCompras(String descritorLista) {
-		return controller.imprimirListaDeCompras(descritorLista);
-	}
-
 	public String getItemListaPorData(String data, int posicao) {
 		return controller.getItemListaPorData(data, posicao);
 	}
@@ -101,9 +105,9 @@ public class Facade {
 	public String getItemListaPorItem(int id, int posicaoLista) {
 		return controller.getItemListaPorItem(id, posicaoLista);
 	}
-
-	public String exibeItem(int id) {
-		return controller.exibeItem(id);
+	
+	public String dataAtual() {
+		return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 	}
 
 }

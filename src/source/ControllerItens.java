@@ -18,24 +18,24 @@ public class ControllerItens {
 		this.id = 1;
 	}
 
-	public int adicionaItemPorQtd(String nome, String categoria, int qnt, String unidadeDeMedida, String localDeCompra,
-			double preco) {
-		
-		item = new Item(nome, categoria, qnt, unidadeDeMedida, localDeCompra, preco, id);
+	public int adicionaItemPorQtd(String nome, String categoria, String localDeCompra,
+			double preco, int qnt, String unidadeDeMedida) {
+		item = new ItemPorQnt(nome, categoria, localDeCompra, preco, id, qnt, unidadeDeMedida);
+		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
-	public int adicionaItemPorQuilo(String nome, String categoria, double kg, String localDeCompra, double preco) {
-		
-		item = new Item(nome, categoria, kg, localDeCompra, preco, id);
+	public int adicionaItemPorQuilo(String nome, String categoria, String localDeCompra, double preco, double kg) {
+		item = new ItemPorQuilo(nome, categoria, localDeCompra, preco, id, kg);
+		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
 
-	public int adicionaItemPorUnidade(String nome, String categoria, int unidade, String localDeCompra, double preco) {
-		
-		item = new Item(nome, categoria, unidade, localDeCompra, preco, id);
+	public int adicionaItemPorUnidade(String nome, String categoria, String localDeCompra, double preco, int unidade) {
+		item = new ItemPorUnidade(nome, categoria, localDeCompra, preco, id, unidade);
+		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
@@ -153,6 +153,9 @@ public class ControllerItens {
 	}
 	
 	public Item getItemPorID(int id) {
+		if(!itens.containsKey(id)) {
+			throw new NullPointerException(" item nao existe no sistema.");
+		}
 		return itens.get(id);
 	}
 
@@ -239,5 +242,13 @@ public class ControllerItens {
 			throw new NullPointerException("Erro no cadastro de preco: item nao existe.");
 		}
 
+	}
+	
+	private void validandoEntradaItem(String nome) {
+		for (Item item: itens.values()) {
+			if (item.getNome().equals(nome)) {
+				throw new IllegalArgumentException("Erro no cadastro de item: item ja cadastrado no sistema.");
+			}
+		}
 	}
 }
