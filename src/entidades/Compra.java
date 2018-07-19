@@ -1,4 +1,6 @@
-package source;
+package entidades;
+
+import entidadesItem.ItemPorQnt;
 
 public class Compra {
 

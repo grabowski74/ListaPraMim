@@ -1,8 +1,11 @@
-package source;
+package controllers;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+
+import entidades.Item;
+import entidades.Lista;
 
 public class ControllerListas {
 	

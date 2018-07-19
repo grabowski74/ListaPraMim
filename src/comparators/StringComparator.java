@@ -1,4 +1,4 @@
-package source;
+package comparators;
 /**
  * 
  * Representa�ao da classe auxiliar StringComparator que implementa a interface nativa
@@ -13,6 +13,8 @@ package source;
  * 
  */
 import java.util.Comparator;
+
+import entidades.Item;
 
 public class StringComparator implements Comparator<Item> {
 

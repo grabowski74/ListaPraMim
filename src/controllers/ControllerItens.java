@@ -1,4 +1,4 @@
-package source;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import comparators.PrecoComparator;
+import comparators.StringComparator;
+import entidades.Item;
+import entidadesItem.ItemPorQnt;
+import entidadesItem.ItemPorQuilo;
+import entidadesItem.ItemPorUnidade;
 
 public class ControllerItens {
 	private Item item;
