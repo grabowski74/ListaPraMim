@@ -2,6 +2,8 @@ package source;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import source.OrdenadorLista;
 
 public class Lista {
 
@@ -36,9 +38,10 @@ public class Lista {
 				if (compra.getQnt() == 0) {
 					comp = compra;
 				}
+				compras.remove(comp);
+				break;
 			}
 		}
-		compras.remove(comp);
 		if (aux == false) {
 			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
@@ -61,6 +64,9 @@ public class Lista {
 	}
 
 	public String getItem(int posicaoItem) {
+		if(posicaoItem >= compras.size()){
+			return "";
+		}
 		return compras.get(posicaoItem).toString();
 	}
 }
