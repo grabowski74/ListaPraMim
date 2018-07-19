@@ -3,7 +3,7 @@ package source;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import source.OrdenadorLista;
+import java.util.Comparator;
 
 public class Lista {
 
@@ -11,6 +11,7 @@ public class Lista {
 	private int valor;
 	private Compra compra;
 	private List<Compra> compras;
+	private Comparator<Compra> comparador;
 
 	public Lista(String descritor) {
 		validandoEntradaDescritor(descritor);
@@ -20,6 +21,8 @@ public class Lista {
 	public void adicionaCompra(int qnt, Item item) {
 		compra = new Compra(qnt, item);
 		compras.add(compra);
+		this.comparador = new OrdenadorLista();
+		Collections.sort(compras, comparador);
 	}
 
 	public void finalizaLista(String localDaCompra, int valor) {
@@ -68,5 +71,15 @@ public class Lista {
 			return "";
 		}
 		return compras.get(posicaoItem).toString();
+	}
+
+	public void deleta(int id) {
+		for (Compra compra: compras) {
+			if(compra.getId() == id) {
+				compras.remove(compra);
+				break;
+			}
+		}
+		
 	}
 }

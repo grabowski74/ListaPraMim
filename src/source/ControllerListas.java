@@ -55,8 +55,7 @@ public class ControllerListas {
 	}
 
 	public void deletaCompraDaLista(String descritorLista, int id) {
-		
-		
+		mapaDasListas.get(descritorLista).deleta(id);
 	}
 
 	public String imprimirListaDeCompras(String descritorLista) {
