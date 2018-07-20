@@ -1,5 +1,7 @@
 package controllers;
-
+/**
+ * 
+ */
 import easyaccept.EasyAccept;
 import java.util.Date;
 import java.text.DateFormat;
