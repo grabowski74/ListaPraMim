@@ -13,18 +13,38 @@ import entidadesItem.Item;
 import entidadesItem.ItemPorQnt;
 import entidadesItem.ItemPorQuilo;
 import entidadesItem.ItemPorUnidade;
-
+/**
+ * Representacao de um sitema de cadastro de lista de compras, nesse sistema e possivel cadastrar,
+ * alterar, editar, adicionar e deletar listas e produtos. ListaPraMim
+ * 
+ * @author Matheus Silva Araujo - 117210375
+ * @author Gabriel Guimaraes Almeida
+ * 
+ * Projeto de Laboratorio - Laboratorio de Programacao 2 - 2018.1
+ *
+ */
 public class ControllerItens {
 	private Item item;
 	private Map<Integer, Item> itens;
 	private int id;
 	private Comparator<Item> comparador;
-
+	/**
+	 * 
+	 */
 	public ControllerItens() {
 		itens = new HashMap<Integer, Item>();
 		this.id = 1;
 	}
-
+	/**
+	 * 
+	 * @param nome
+	 * @param categoria
+	 * @param localDeCompra
+	 * @param preco
+	 * @param qnt
+	 * @param unidadeDeMedida
+	 * @return
+	 */
 	public int adicionaItemPorQtd(String nome, String categoria, String localDeCompra,
 			double preco, int qnt, String unidadeDeMedida) {
 		item = new ItemPorQnt(nome, categoria, localDeCompra, preco, id, qnt, unidadeDeMedida);
@@ -32,21 +52,42 @@ public class ControllerItens {
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
-
+	/**
+	 * 
+	 * @param nome
+	 * @param categoria
+	 * @param localDeCompra
+	 * @param preco
+	 * @param kg
+	 * @return
+	 */
 	public int adicionaItemPorQuilo(String nome, String categoria, String localDeCompra, double preco, double kg) {
 		item = new ItemPorQuilo(nome, categoria, localDeCompra, preco, id, kg);
 		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
-
+	/**
+	 * 
+	 * @param nome
+	 * @param categoria
+	 * @param localDeCompra
+	 * @param preco
+	 * @param unidade
+	 * @return
+	 */
 	public int adicionaItemPorUnidade(String nome, String categoria, String localDeCompra, double preco, int unidade) {
 		item = new ItemPorUnidade(nome, categoria, localDeCompra, preco, id, unidade);
 		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
-
+	/**
+	 * 
+	 * @param id
+	 * @param atributo
+	 * @param novoValor
+	 */
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		validandoAtributo(atributo);
 		validandoNovoValor(atributo, novoValor);
@@ -58,17 +99,29 @@ public class ControllerItens {
 		itens.get(id).atualizaItem(atributo, novoValor);
 
 	}
-
+	/**
+	 * 
+	 * @param id
+	 * @param supermercado
+	 * @param preco
+	 */
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 
 		validandoCadastroDePreco(id, supermercado, preco);
 		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
-
+	/**
+	 * 
+	 * @param id
+	 */
 	public void deletaItem(int id) {
 		itens.remove(id);
 	}
-
+	/**
+	 * 
+	 * @param posicao
+	 * @return
+	 */
 	public String getItem(int posicao) {
 		this.comparador = new StringComparator();
 		List<Item> listaItens = new ArrayList<>();
@@ -87,7 +140,12 @@ public class ControllerItens {
 
 		return res;
 	}
-
+	/**
+	 * 
+	 * @param categoria
+	 * @param posicao
+	 * @return
+	 */
 	public String getItemPorCategoria(String categoria, int posicao) {
 		if (categoria.equals(null) || "".equals(categoria.trim())) {
 			throw new NullPointerException("");
@@ -113,7 +171,11 @@ public class ControllerItens {
 		}
 		return res;
 	}
-
+	/**
+	 * 
+	 * @param posicao
+	 * @return
+	 */
 	public String getItemPorMenorPreco(int posicao) {
 		this.comparador = new PrecoComparator();
 		List<Item> OutraListaItens = new ArrayList<>(itens.values());
@@ -126,7 +188,12 @@ public class ControllerItens {
 		}
 		return res;
 	}
-
+	/**
+	 * 
+	 * @param strPesquisada
+	 * @param posicao
+	 * @return
+	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao) {
 		this.comparador = new StringComparator();
 		List<Item> listaItens = new ArrayList<>();
@@ -149,7 +216,11 @@ public class ControllerItens {
 		}
 		return res;
 	}
-
+	/**
+	 * 
+	 * @param id2
+	 * @return
+	 */
 	public String exibeItem(int id2) {
 		if (id2 <= 0) {
 			throw new IllegalArgumentException("Erro na listagem de item: id invalido.");
@@ -158,7 +229,11 @@ public class ControllerItens {
 		}
 		return itens.get(id2).toString();
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Item getItemPorID(int id) {
 		if(!itens.containsKey(id)) {
 			throw new NullPointerException(" item nao existe no sistema.");
