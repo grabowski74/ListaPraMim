@@ -217,7 +217,6 @@ public class ControllerListas {
 				listas.add(lista.getDescritor());
 			}
 		}
-		
 		if (listas.size() == 0) {
 			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
