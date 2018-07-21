@@ -15,9 +15,12 @@ import java.text.SimpleDateFormat;
 
 /**
  * 
- * @author Gabriel Gu7imaraes de Almeida, Matheus Silva Araujo; Classe que
- *         representa uma lista de compras. Possui uma lista de compras com suas
- *         quantidades a serem compradas.
+ * @author Gabriel Gu7imaraes de Almeida, Matheus Silva Araujo;
+ * 
+ *         Classe que representa uma lista de compras. Possui uma lista de
+ *         compras com suas quantidades a serem compradas.
+ * 
+ *         Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim
  */
 public class ListaDeCompras {
 

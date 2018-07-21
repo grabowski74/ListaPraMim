@@ -6,6 +6,8 @@ import entidadesItem.ItemPorQnt;
 /**
  * 
  * @author Gabriel Guimaraes de Almeida, Metheus Silva Araujo
+ * 
+ *         Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim
  *
  *         Classe que representa uma compra adicionada a uma lista de compras
  *         anteriormente criadas.
