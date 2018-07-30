@@ -398,4 +398,25 @@ public class ControllerListas {
 		return (int) (qntAparicoes/aparicoesListas);
 	}
 
+	public ListaDeCompras getLista(String descritor) {
+		return mapaDasListas.get(descritor);
+	}
+
+	public String sugereMelhorEstabelecimento(String descritor, int posicao, int posicaoLista) {
+		criaListaEstabelecimentos(descritor);
+		return null;
+	}
+
+	private void criaListaEstabelecimentos(String descritor) {
+		List<List> listaEstabelecimentos = new ArrayList<>();
+		for(Compra compra: mapaDasListas.get(descritor).getCompras()) {
+			for(String nome: compra.getItem().getPrecos()) {
+				if (!listaEstabelecimentos.contains(nome)) {
+					listaEstabelecimentos.add(new ArrayList<String>());
+				}
+			}
+		}
+		
+	}
+
 }

@@ -288,7 +288,9 @@ public class Facade {
 		return controller.geraAutomaticaItensMaisPresentes(dataAtual());
 	}
 	
-	
+	public String sugereMelhorEstabelecimento(String descritor, int posicao, int posicaoLista) {
+		return controller.sugereMelhorEstabelecimento(descritor, posicao, posicaoLista);
+	}
 
 
 }

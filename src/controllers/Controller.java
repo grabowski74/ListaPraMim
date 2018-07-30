@@ -1,4 +1,11 @@
 package controllers;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import entidades.Compra;
+import entidades.ListaDeCompras;
+
 /**
  * Representacao de um sitema de cadastro de lista de compras, nesse sistema e possivel cadastrar,
  * alterar, editar, adicionar e deletar listas e produtos. ListaPraMim
@@ -284,5 +291,9 @@ public class Controller {
 
 	public String geraAutomaticaItensMaisPresentes(String dataAtual) {
 		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
+	}
+
+	public String sugereMelhorEstabelecimento(String descritor, int posicao, int posicaoLista) {
+		return controllerListas.sugereMelhorEstabelecimento(descritor, posicao, posicaoLista);
 	}
 }

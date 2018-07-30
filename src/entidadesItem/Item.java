@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -24,8 +25,6 @@ public abstract class Item {
 	protected int id;
 	// Atributo que representa a categoria a que o Item esta relacionado.
 	protected String categoria;
-	// O local onde foi registrado o Item.
-	protected String localDeCompra;
 	// O preco do Item.
 	protected double preco;
 
@@ -55,7 +54,6 @@ public abstract class Item {
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.localDeCompra = localDeCompra;
 		this.preco = preco;
 		adicionaPrecoItem(localDeCompra, preco);
 
@@ -225,6 +223,10 @@ public abstract class Item {
 		if (nome.equals(null) || nome.trim().equals("")) {
 			throw new NullPointerException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
 		}
+	}
+	
+	public Set<String> getPrecos(){
+		return precos.keySet();
 	}
 
 }
