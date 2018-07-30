@@ -14,7 +14,8 @@ package comparators;
  */
 import java.util.Comparator;
 
-import entidades.Item;
+
+import entidadesItem.Item;
 
 public class PrecoComparator implements Comparator<Item> {
 
