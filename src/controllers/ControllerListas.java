@@ -3,7 +3,7 @@ package controllers;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -111,7 +111,6 @@ public class ControllerListas {
 	public void adicionaCompraALista(String descritorLista, int qnt, Item item) {
 		if (mapaDasListas.containsKey(descritorLista)) {
 			mapaDasListas.get(descritorLista).adicionaCompra(qnt, item);
-			item.taNaLista(qnt);
 		}
 	}
 
@@ -222,7 +221,6 @@ public class ControllerListas {
 			}
 		}
 		if (a) {
-			mapaDasListas.get(descritorLista).getItemPorId(id).saiuDaLista(listaDeCompras.getQnt());
 			mapaDasListas.get(descritorLista).deleta(id);
 		} else {
 			throw new Error("compra nao encontrada na lista.");
@@ -362,11 +360,11 @@ public class ControllerListas {
 			throw new Error(
 					"Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
 		}
-		for (ListaDeCompras a : mapaDasListas.values()) {
-			if (a.getID() == cont) {
+		for (ListaDeCompras lista : mapaDasListas.values()) {
+			if (lista.getID() == cont) {
 				adicionaListaDeCompras("Lista automatica 2 " + dataAtual);
-				for (Compra b : a.getCompras()) {
-					adicionaCompraALista("Lista automatica 2 " + dataAtual, b.getQnt(), b.getItem());
+				for (Compra compra : lista.getCompras()) {
+					adicionaCompraALista("Lista automatica 2 " + dataAtual, compra.getQnt(), compra.getItem());
 				}
 				break;
 			}
@@ -376,15 +374,28 @@ public class ControllerListas {
 
 	public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String dataAtual) {
 		adicionaListaDeCompras("Lista automatica 3 " + dataAtual);
-		for (Item a : itens) {
-			if (a.getAparicoes() > mapaDasListas.size() / 2) {
-				double media = Math.floor(a.getQntAparicoes() / a.getAparicoes());
-				int med = (int) media;
-				adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a);
+		int aparicoesListas;
+		int qntAparicoes;
+		for (Item item : itens) {
+			aparicoesListas = 0;
+			qntAparicoes = 0;
+			for (ListaDeCompras lista: mapaDasListas.values()) {
+				if (lista.contemItem(item.getId())) {
+					aparicoesListas += 1;
+					qntAparicoes += lista.getCompra(item).getQnt();
+				}
 			}
+			if (aparicoesListas >= ((mapaDasListas.values().size()-1) / 2.0)) {
+				adicionaCompraALista("Lista automatica 3 " + dataAtual, media(qntAparicoes, aparicoesListas), item);
+			}
+			
 		}
 		return "Lista automatica 3 " + dataAtual;
 
+	}
+
+	private int media(int qntAparicoes, int aparicoesListas) {
+		return (int) (qntAparicoes/aparicoesListas);
 	}
 
 }

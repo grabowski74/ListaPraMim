@@ -283,7 +283,6 @@ public class Controller {
 	}
 
 	public String geraAutomaticaItensMaisPresentes(String dataAtual) {
-		System.out.println(dataAtual);
 		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
 	}
 }

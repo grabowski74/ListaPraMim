@@ -71,7 +71,7 @@ expect "Lista automatica 3 "${dataAtual} geraAutomaticaItensMaisPresentes
 idDescritor=geraAutomaticaItensMaisPresentes
 
 expect "3 Pasta dental DDS, higiene pessoal, 120 gramas" getItemLista descritorLista=${idDescritor} posicaoItem=0
-expect "3 Sabonete de aveia Dorene, higiene pessoal, 80 gramas" getItemLista descritorLista=${idDescritor} posicaoItem=1
+expect "2 Sabonete de aveia Dorene, higiene pessoal, 80 gramas" getItemLista descritorLista=${idDescritor} posicaoItem=1
 expect "1 Queijo minas Dali, alimento industrializado"  getItemLista descritorLista=${idDescritor} posicaoItem=2
 expect "2 Carne moida extra light, alimento nao industrializado"  getItemLista descritorLista=${idDescritor} posicaoItem=3
 expect "1 Chuchu, alimento nao industrializado"  getItemLista descritorLista=${idDescritor} posicaoItem=4

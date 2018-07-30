@@ -79,6 +79,7 @@ expect "2 Batata doce, alimento nao industrializado" getItemLista descritorLista
 expect "2 Carne moida extra light, alimento nao industrializado" getItemLista descritorLista="feira semana" posicaoItem=8
 expect "1 Chuchu, alimento nao industrializado" getItemLista descritorLista="feira semana" posicaoItem=9
 
+
 ######################################
 ## Teste de Delete de item da lista ##
 ######################################
