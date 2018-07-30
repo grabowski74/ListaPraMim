@@ -22,7 +22,9 @@ public class Facade {
 		args = new String[] { "controllers.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
 				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
 				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
+
 				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt" };
+
 		EasyAccept.main(args);
 	}
 	
@@ -273,6 +275,7 @@ public class Facade {
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return controller.pesquisaListaDeComprasPorItem(id);
 	}
+
 	
 	public String geraAutomaticaUltimaLista() {
 		return controller.geraAutomaticaUltimaLista(dataAtual());
@@ -285,5 +288,6 @@ public class Facade {
 	public String geraAutomaticaItensMaisPresentes() {
 		return controller.geraAutomaticaItensMaisPresentes(dataAtual());
 	}
+
 
 }

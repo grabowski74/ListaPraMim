@@ -228,7 +228,9 @@ public class Controller {
 		try {
 			controllerItens.getItemPorID(id);
 		} catch(Exception r) {
-			throw new Error("Erro na exclusao de compra:" + r.getMessage());
+
+			throw new NullPointerException("Erro na exclusao de compra:" + r.getMessage());
+
 		}
 		controllerListas.deletaCompraDaLista(descritorLista, id);
 	}
@@ -271,6 +273,7 @@ public class Controller {
 		return controllerListas.pesquisaListaDeComprasPorItem(id);
 	}
 
+
 	public String geraAutomaticaUltimaLista(String dataAtual) {
 		return controllerListas.geraAutomaticaUltimaLista(dataAtual);
 	}
@@ -283,5 +286,4 @@ public class Controller {
 		System.out.println(dataAtual);
 		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
 	}
-
 }

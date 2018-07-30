@@ -17,17 +17,21 @@ import entidadesItem.ItemPorQnt;
 import entidadesItem.ItemPorQuilo;
 import entidadesItem.ItemPorUnidade;
 
+
 /**
  * Representacao de um sitema de cadastro de lista de compras, nesse sistema e
  * possivel cadastrar, alterar, editar, adicionar e deletar listas e produtos.
  * ListaPraMim
+
  * 
  * @author Matheus Silva Araujo - 117210375
  * @author Gabriel Guimaraes Almeida
  * 
+
  *         Projeto de Laboratorio - Laboratorio de Programacao 2 - 2018.1
  *
  */
+
 
 public class ControllerItens {
 	private Item item;
@@ -35,15 +39,18 @@ public class ControllerItens {
 	private int id;
 	private Comparator<Item> comparador;
 
+
 	/**
 	 * Realiza a construcao do ControllerItens do sistema, toda ControllerItens
 	 * instancia um mapa de itens
 	 */
 
+
 	public ControllerItens() {
 		itens = new HashMap<Integer, Item>();
 		this.id = 1;
 	}
+
 
 	/**
 	 * Realiza a operacao de adicionar um item ao sistema por sua quantidade.
@@ -65,11 +72,13 @@ public class ControllerItens {
 
 	public int adicionaItemPorQtd(String nome, String categoria, String localDeCompra, double preco, int qnt,
 			String unidadeDeMedida) {
+
 		item = new ItemPorQnt(nome, categoria, localDeCompra, preco, id, qnt, unidadeDeMedida);
 		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
+
 
 	/**
 	 * Realiza a operacao de adicionar um item ao sistema por seu peso.
@@ -87,12 +96,14 @@ public class ControllerItens {
 	 * @return retorna o numero de identificacao unica do item
 	 */
 
+
 	public int adicionaItemPorQuilo(String nome, String categoria, String localDeCompra, double preco, double kg) {
 		item = new ItemPorQuilo(nome, categoria, localDeCompra, preco, id, kg);
 		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
+
 
 	/**
 	 * Realiza a operacao de adicionar um item ao sistema por sua unidade.
@@ -110,12 +121,14 @@ public class ControllerItens {
 	 * @return retorna o numero de identificacao unica do item
 	 */
 
+
 	public int adicionaItemPorUnidade(String nome, String categoria, String localDeCompra, double preco, int unidade) {
 		item = new ItemPorUnidade(nome, categoria, localDeCompra, preco, id, unidade);
 		validandoEntradaItem(nome);
 		this.itens.put(this.id, item);
 		return this.id++;
 	}
+
 
 	/**
 	 * Realiza a operacao de atualizar um item a partir do atributo e novo valor
@@ -129,6 +142,7 @@ public class ControllerItens {
 	 *            e o valor a ser atualizado
 	 */
 
+
 	public void atualizaItem(int id, String atributo, String novoValor) {
 		validandoAtributo(atributo);
 		validandoNovoValor(atributo, novoValor);
@@ -141,6 +155,7 @@ public class ControllerItens {
 
 	}
 
+
 	/**
 	 * Realiza a operacao de adicionar um preco a um determinado item
 	 * 
@@ -152,27 +167,32 @@ public class ControllerItens {
 	 *            e o novo preco a ser cadastrado no referido supermercado
 	 */
 
+
 	public void adicionaPrecoItem(int id, String supermercado, double preco) {
 
 		validandoCadastroDePreco(id, supermercado, preco);
 		this.itens.get(id).adicionaPrecoItem(supermercado, preco);
 	}
 
+
 	/**
 	 * Realiza a operacao de deletar um item a partir do seu id
 	 * 
 	 * @param id
 	 *            e o numero de identificacao unica do referido item
+
 	 */
 	public void deletaItem(int id) {
 		itens.remove(id);
 	}
+
 
 	/**
 	 * Realiza a operacao de exibir o item a partir da sua posicao na lista de itens
 	 * 
 	 * @param posicao
 	 *            e a posicao do referido item
+
 	 * @return retorna o status do item desejado
 	 */
 	public String getItem(int posicao) {
@@ -194,6 +214,7 @@ public class ControllerItens {
 		return res;
 	}
 
+
 	/**
 	 * Realiza a operacao de exibir o item a partir da sua categoria na lista de
 	 * itens
@@ -202,6 +223,7 @@ public class ControllerItens {
 	 *            e a categoria do referido item
 	 * @param posicao
 	 *            e a posicao do referido item
+
 	 * @return retorna o status do item desejado
 	 */
 	public String getItemPorCategoria(String categoria, int posicao) {
@@ -230,11 +252,13 @@ public class ControllerItens {
 		return res;
 	}
 
+
 	/**
 	 * Realiza a operacao de exibir o item a partir do seu preco na lista de itens
 	 * 
 	 * @param posicao
 	 *            e a posicao do referido item
+
 	 * @return retorna o status do item desejado
 	 */
 	public String getItemPorMenorPreco(int posicao) {
@@ -250,6 +274,7 @@ public class ControllerItens {
 		return res;
 	}
 
+
 	/**
 	 * Realiza a operacao de exibir o item a partir do seu nome
 	 * 
@@ -257,6 +282,7 @@ public class ControllerItens {
 	 *            e o nome do item desejado
 	 * @param posicao
 	 *            e a posicao do referido item
+
 	 * @return retorna o status do item desejado
 	 */
 	public String getItemPorPesquisa(String strPesquisada, int posicao) {
@@ -266,9 +292,11 @@ public class ControllerItens {
 		for (int id2 : itens.keySet()) {
 			for (String str : itens.get(id2).getNome().split(" ")) {
 				if (str.toLowerCase().startsWith(strPesquisada)) {
+
 					listaItens.add(itens.get(id2));
 				}
 			}
+
 		}
 
 		String res = "";
@@ -281,6 +309,7 @@ public class ControllerItens {
 		return res;
 	}
 
+
 	/**
 	 * Realiza a operacao de exibir o item atraves do numero de identificacao unica
 	 * fornecido
@@ -291,6 +320,7 @@ public class ControllerItens {
 	 */
 	
 
+
 	public String exibeItem(int id2) {
 		if (id2 <= 0) {
 			throw new IllegalArgumentException("Erro na listagem de item: id invalido.");
@@ -298,6 +328,8 @@ public class ControllerItens {
 			throw new NullPointerException("Erro na listagem de item: item nao existe.");
 		}
 		return itens.get(id2).toString();
+
+	}
 
 	/**
 	 * 

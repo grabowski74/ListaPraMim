@@ -28,12 +28,14 @@ public abstract class Item {
 	protected String localDeCompra;
 	// O preco do Item.
 	protected double preco;
+
 	
 	private int media;
 	
 	private int aparicoes;
 	
 	private int qntAparicoes;
+
 
 	/**
 	 * Construtor da classe.
@@ -62,7 +64,9 @@ public abstract class Item {
 		this.localDeCompra = localDeCompra;
 		this.preco = preco;
 		adicionaPrecoItem(localDeCompra, preco);
+
 		this.media = 0;
+
 	}
 
 	/**
@@ -167,6 +171,7 @@ public abstract class Item {
 		return Collections.min(listPrecos);
 
 	}
+
 	
 	public void setMedia(int media) {
 		this.media = media;
@@ -175,6 +180,7 @@ public abstract class Item {
 	public int getMedia() {
 		return this.media;
 	}
+
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
 
@@ -236,6 +242,7 @@ public abstract class Item {
 		}
 	}
 
+
 	public void taNaLista(int qnt) {
 		this.aparicoes += 1;
 		this.qntAparicoes += qnt;
@@ -254,5 +261,6 @@ public abstract class Item {
 		this.qntAparicoes -= qnt;
 	}
 	
+
 
 }

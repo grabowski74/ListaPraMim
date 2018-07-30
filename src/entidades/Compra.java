@@ -56,6 +56,7 @@ public class Compra {
 	 *            A quantidade a ser somada ou subtraida.
 	 */
 
+
 	public void atualiza(String operacao, int qnt) {
 		if (operacao.equals("adiciona")) {
 			this.qnt += qnt;
@@ -105,7 +106,9 @@ public class Compra {
 		return this.item.getNome();
 	}
 
+
 	public Item getItem() {
 		return this.item;
 	}
+
 }

@@ -47,7 +47,9 @@ public class ListaDeCompras {
 	private String data;
 	// A hora que em a lis ta foi criada;
 	private String hora;
+
 	private int id;
+
 
 	/**
 	 * Construtor da classe. Recebe somente uma String que representa o nome da
@@ -57,13 +59,17 @@ public class ListaDeCompras {
 	 *            O nome da lista. Cada lista tem um descritor unico e eh o seu
 	 *            identificador.
 	 */
+
 	public ListaDeCompras(String descritor, int id) {
+
 		validandoEntradaDescritor(descritor);
 		this.descritor = descritor;
 		compras = new ArrayList<>();
 		this.data = new SimpleDateFormat("dd/MM/yyyy").format(horario);
 		this.hora = new SimpleDateFormat("hh:mm:ss").format(horario);
+
 		this.id = id;
+
 	}
 
 	/**
@@ -213,6 +219,7 @@ public class ListaDeCompras {
 	 */
 	public Object getData() {
 		return this.data;
+
 	}
 
 	/**
@@ -256,11 +263,13 @@ public class ListaDeCompras {
 	public boolean contemItem(String descritorItem) {
 		for (Compra compra : compras) {
 			if (compra.getNome().equals(descritorItem)) {
+
 				return true;
 			}
 		}
 		return false;
 	}
+
 
 	public int getID() {
 		return this.id;
@@ -286,5 +295,6 @@ public class ListaDeCompras {
 		}
 		throw new NullPointerException("Erro na exclusao de compra: compra nao encontrada na lista.");
 	}
+
 
 }
