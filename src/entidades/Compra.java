@@ -27,6 +27,7 @@ public class Compra {
 	 * @param item
 	 *            O item relacionado a compra.
 	 */
+
 	public Compra(int qnt, Item item) {
 		this.item = item;
 		this.qnt = qnt;
@@ -37,6 +38,7 @@ public class Compra {
 	 * 
 	 * @return Retorna um inteiro que representa o ID.
 	 */
+
 	public int getId() {
 		return this.item.getId();
 	}
@@ -53,6 +55,8 @@ public class Compra {
 	 * @param qnt
 	 *            A quantidade a ser somada ou subtraida.
 	 */
+
+
 	public void atualiza(String operacao, int qnt) {
 		if (operacao.equals("adiciona")) {
 			this.qnt += qnt;
@@ -101,4 +105,10 @@ public class Compra {
 	public String getNome() {
 		return this.item.getNome();
 	}
+
+
+	public Item getItem() {
+		return this.item;
+	}
+
 }

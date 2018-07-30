@@ -1,6 +1,7 @@
 package comparators;
 /**
  * 
+
  * Representacao da classe auxiliar StringComparator que implementa a interface nativa
 
  * Comparator, cujo a sua funcao e ordenar os itens de acordo com o seu nome.
@@ -13,6 +14,7 @@ package comparators;
  * 
  */
 import java.util.Comparator;
+
 
 import entidadesItem.Item;
 

@@ -48,6 +48,9 @@ public class ListaDeCompras {
 	// A hora que em a lis ta foi criada;
 	private String hora;
 
+	private int id;
+
+
 	/**
 	 * Construtor da classe. Recebe somente uma String que representa o nome da
 	 * lista no sitema;
@@ -56,12 +59,17 @@ public class ListaDeCompras {
 	 *            O nome da lista. Cada lista tem um descritor unico e eh o seu
 	 *            identificador.
 	 */
-	public ListaDeCompras(String descritor) {
+
+	public ListaDeCompras(String descritor, int id) {
+
 		validandoEntradaDescritor(descritor);
 		this.descritor = descritor;
 		compras = new ArrayList<>();
 		this.data = new SimpleDateFormat("dd/MM/yyyy").format(horario);
 		this.hora = new SimpleDateFormat("hh:mm:ss").format(horario);
+
+		this.id = id;
+
 	}
 
 	/**
@@ -211,6 +219,7 @@ public class ListaDeCompras {
 	 */
 	public Object getData() {
 		return this.data;
+
 	}
 
 	/**
@@ -238,5 +247,54 @@ public class ListaDeCompras {
 		}
 		return false;
 	}
+
+	public String getHora() {
+		return this.hora;
+	}
+
+	public void setData(String novaData) {
+		this.data = novaData;
+	}
+
+	public void setDescritor(String novoDescritor) {
+		this.descritor = novoDescritor;
+	}
+
+	public boolean contemItem(String descritorItem) {
+		for (Compra compra : compras) {
+			if (compra.getNome().equals(descritorItem)) {
+
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public int getID() {
+		return this.id;
+	}
+
+	public List<Compra> getCompras() {
+		return this.compras;
+	}
+
+	public void setID(int id) {
+		this.id = id;
+	}
+
+	public int getQnt() {
+		return compra.getQnt();
+	}
+
+	public Item getItemPorId(int id) {
+		for (Compra compra : compras) {
+			if (compra.getId() == id) {
+				return compra.getItem();
+			}
+		}
+		throw new NullPointerException("Erro na exclusao de compra: compra nao encontrada na lista.");
+	}
+
 
 }
