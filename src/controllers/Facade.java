@@ -2,6 +2,7 @@ package controllers;
 
 import easyaccept.EasyAccept;
 import java.util.Date;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 /**
@@ -22,8 +23,7 @@ public class Facade {
 		args = new String[] { "controllers.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
 				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
 				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
-
-				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt" };
+				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt", "easyAccept/use_case7.txt" };
 
 		EasyAccept.main(args);
 	}
@@ -284,10 +284,18 @@ public class Facade {
 	public String geraAutomaticaItem(String descritorItem) {
 		return controller.geraAutomaticaItem( descritorItem, dataAtual());
 	}
-	
+/**
 	public String geraAutomaticaItensMaisPresentes() {
 		return controller.geraAutomaticaItensMaisPresentes(dataAtual());
 	}
-
+ * @throws IOException 
+**/
+	public void fechaSistema() throws IOException {
+		controller.fechaSistema();
+	}
+	
+	public void iniciaSistema() {
+		controller.iniciaSistema();
+	}
 
 }

@@ -1,5 +1,11 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import java.util.Collection;
@@ -11,7 +17,7 @@ import java.util.Map;
 
 import comparators.PrecoComparator;
 import comparators.StringComparator;
-
+import entidades.ListaDeCompras;
 import entidadesItem.Item;
 import entidadesItem.ItemPorQnt;
 import entidadesItem.ItemPorQuilo;
@@ -38,6 +44,7 @@ public class ControllerItens {
 	private Map<Integer, Item> itens;
 	private int id;
 	private Comparator<Item> comparador;
+	private File diretorio;
 
 
 	/**
@@ -443,5 +450,54 @@ public class ControllerItens {
 
 	public Map<Integer, Item> getMap() {
 		return this.itens;
+	}
+
+
+	public void fechaSistema() throws IOException {
+		FileOutputStream salvar = null;
+		if(diretorio == null) {
+			diretorio = new File("arquivos");
+			diretorio.mkdir();
+		}
+		
+		try {
+			salvar = new FileOutputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectOutputStream objeto = new ObjectOutputStream(salvar);
+			objeto.writeObject(itens);
+		} catch (IOException e) {
+			throw new IOException(e.getMessage());
+		} finally {
+			if (salvar != null) {
+				salvar.close();
+			}
+		}		
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public void iniciaSistema() {
+		FileInputStream ler = null;
+		try {
+			ler = new FileInputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectInputStream objeto = new ObjectInputStream(ler);
+			this.itens = (HashMap<Integer, Item>) objeto.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			try {
+				throw new IOException("Erro na leitura");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				ler.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }
