@@ -10,6 +10,7 @@ import entidadesItem.Item;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -22,8 +23,12 @@ import java.text.SimpleDateFormat;
  * 
  *         Laboratorio de Programacao 2 - Projeto de Laboratorio - ListaPraMim
  */
-public class ListaDeCompras {
+public class ListaDeCompras implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// O local onde sera feita a compra de acordo com a lista;
 	private String localDeCompra;
 	// O nome da lista. Cada lista tem um descritor unico e eh o seu identificador;

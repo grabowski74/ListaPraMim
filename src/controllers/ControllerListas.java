@@ -1,6 +1,12 @@
 package controllers;
 
 import java.util.Date;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -9,7 +15,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import comparators.HoraComparatorListas;
 import comparators.StringComparatorListas;
@@ -21,15 +26,15 @@ import entidadesItem.Item;
  * Representacao de um sitema de cadastro de lista de compras, nesse sistema e
  * possivel cadastrar, alterar, editar, adicionar e deletar listas e produtos.
  * ListaPraMim
-
+ * 
  * 
  * @author Matheus Silva Araujo - 117210375
  * @author Gabriel Guimaraes Almeida
  * 
-
+ * 
  *         Projeto de Laboratorio - Laboratorio de Programacao 2 - 2018.1
-
  *
+ * 
  */
 public class ControllerListas {
 
@@ -41,11 +46,12 @@ public class ControllerListas {
 	private Comparator<ListaDeCompras> comparador2;
 	private int id;
 	private String data;
+	private File diretorio;
 
 	/**
 	 * Realiza a construcao do ControllerListas do sistema, todo ControllerListas
 	 * instacia um mapa de listas de compras.
-
+	 * 
 	 */
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();
@@ -58,7 +64,7 @@ public class ControllerListas {
 	 * 
 	 * @param descritorLista
 	 *            e o nome da referida lista
-
+	 * 
 	 * @return retorna a descricao da lista cadastrada
 	 */
 	public String adicionaListaDeCompras(String descritorLista) {
@@ -68,14 +74,13 @@ public class ControllerListas {
 		return descritorLista;
 	}
 
-
 	/**
 	 * Realiza a operacao de pesquisar listas cadastradas no sistema a partir do seu
 	 * nome
 	 * 
 	 * @param descritorLista
 	 *            e o nome da referida lista
-
+	 * 
 	 * @return retorna o status da lista desejada
 	 */
 	public String pesquisaListaDeCompras(String descritorLista) {
@@ -96,7 +101,6 @@ public class ControllerListas {
 		return aux;
 	}
 
-
 	/**
 	 * Realiza a operacao de adicionar uma compra a uma lista ja cadastrada
 	 * 
@@ -106,7 +110,7 @@ public class ControllerListas {
 	 *            e a quantidade do item a ser adicionado
 	 * @param id
 	 *            e o numero de identificacao unica do item desejado
-
+	 * 
 	 */
 	public void adicionaCompraALista(String descritorLista, int qnt, Item item) {
 		if (mapaDasListas.containsKey(descritorLista)) {
@@ -114,7 +118,6 @@ public class ControllerListas {
 			item.taNaLista(qnt);
 		}
 	}
-
 
 	/**
 	 * Realiza a operacao de finalizar uma lista de compras
@@ -125,7 +128,7 @@ public class ControllerListas {
 	 *            e o local onde a compra foi realizada
 	 * @param valor
 	 *            e o valor final da compra
-
+	 * 
 	 */
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
 		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
@@ -140,7 +143,6 @@ public class ControllerListas {
 			throw new IllegalArgumentException(
 					"Erro na finalizacao de lista de compras: valor final da lista invalido.");
 
-
 		}
 		mapaDasListas.get(descritorLista).finalizaLista(localDaCompra, valor);
 	}
@@ -152,7 +154,7 @@ public class ControllerListas {
 	 *            e o nome da lista referida
 	 * @param id
 	 *            e o numero de identificacao unica do item
-
+	 * 
 	 * @return retorna o status da compra
 	 */
 	public String pesquisaCompraEmLista(String descritorLista, int id) {
@@ -165,7 +167,6 @@ public class ControllerListas {
 		}
 		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
-
 
 	/**
 	 * Realiza a operacao de atualizar uma certa compra em uma lista
@@ -208,12 +209,10 @@ public class ControllerListas {
 	 *            e o numero de identificacao unica do item
 	 */
 
-
 	public void deletaCompraDaLista(String descritorLista, int id) {
 		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
 			throw new NullPointerException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
 		}
-
 
 		boolean a = false;
 		for (ListaDeCompras b : mapaDasListas.values()) {
@@ -272,7 +271,6 @@ public class ControllerListas {
 			}
 		}
 
-
 		Collections.sort(listas, comparador1);
 
 		return mapaDasListas.get(listas.get(posicaoLista)).getData() + " - " + listas.get(posicaoLista);
@@ -283,7 +281,7 @@ public class ControllerListas {
 	 * 
 	 * @param data
 	 *            e a data desejada a ser pesquisada
-
+	 * 
 	 * @return retorna o status da lista
 	 */
 	public String pesquisaListaDeComprasPorData(String data) {
@@ -303,7 +301,6 @@ public class ControllerListas {
 				listas.add(lista.getDescritor());
 			}
 		}
-
 
 		Collections.sort(listas, comparador1);
 		return listas.toString();
@@ -329,7 +326,6 @@ public class ControllerListas {
 		if (listas.size() == 0) {
 			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
-
 
 		Collections.sort(listas, comparador1);
 
@@ -374,16 +370,58 @@ public class ControllerListas {
 		return "Lista automatica 2 " + dataAtual;
 	}
 
-	public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String dataAtual) {
-		adicionaListaDeCompras("Lista automatica 3 " + dataAtual);
-		for (Item a : itens) {
-			if (a.getAparicoes() > mapaDasListas.size() / 2) {
-				double media = Math.floor(a.getQntAparicoes() / a.getAparicoes());
-				int med = (int) media;
-				adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a);
+	/**
+	 * public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String
+	 * dataAtual) { adicionaListaDeCompras("Lista automatica 3 " + dataAtual); for
+	 * (Item a : itens) { if (a.getAparicoes() > mapaDasListas.size() / 2) { double
+	 * media = Math.floor(a.getQntAparicoes() / a.getAparicoes()); int med = (int)
+	 * media; adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a); } }
+	 * return "Lista automatica 3 " + dataAtual;
+	 * 
+	 * }
+	 * 
+	 * @throws IOException
+	 **/
+
+	public void fechaSistema() throws IOException {
+		FileOutputStream salvar = null;
+		if (diretorio == null) {
+			diretorio = new File("arquivosListas");
+			diretorio.mkdir();
+		}
+
+		try {
+			salvar = new FileOutputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectOutputStream objeto = new ObjectOutputStream(salvar);
+			objeto.writeObject(mapaDasListas);
+		} catch (IOException e) {
+		} finally {
+			if (salvar != null) {
+				salvar.close();
 			}
 		}
-		return "Lista automatica 3 " + dataAtual;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void iniciaSistema()  {
+		FileInputStream ler = null;
+		try {
+			ler = new FileInputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectInputStream objeto = new ObjectInputStream(ler);
+			this.mapaDasListas = (HashMap<String, ListaDeCompras>) objeto.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			
+		} finally {
+			try {
+				ler.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
