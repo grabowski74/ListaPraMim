@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import comparators.HoraComparatorListas;
+import comparators.StringComparator;
 import comparators.StringComparatorListas;
+import comparators.ListaMercadosComparator;
 import entidades.Compra;
 import entidades.ListaDeCompras;
 import entidadesItem.Item;
@@ -44,6 +46,7 @@ public class ControllerListas {
 	private ControllerItens listaDeItens;
 	private Comparator<String> comparador1;
 	private Comparator<ListaDeCompras> comparador2;
+	private Comparator<Item> comparador3;
 	private int id;
 	private String data;
 	private File diretorio;
@@ -424,8 +427,11 @@ public class ControllerListas {
 	}
 
 	public String sugere(String descritor, int posicaoEstabelecimento, int posicaoLista) {
+		this.comparador1 = new ListaMercadosComparator();
 		List<List<String>> lista = new ArrayList<>();
+		List<List<String>> listaDefinitiva = new ArrayList<>();
 		List<String> listaMercados = new ArrayList<>();
+
 		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
 			List<String> listaPrecos = new ArrayList<>();
 			for (String mercado : compra.getItem().getPrecoMercado()) {
@@ -435,21 +441,28 @@ public class ControllerListas {
 			}
 			for (String mercado : listaMercados) {
 				List<String> sla = new ArrayList<>();
-				sla.add(mercado + ": " + pegaOsPrecos(descritor, mercado));
+				sla.add(mercado);
 				if (!lista.contains(sla)) {
 					lista.add(sla);
 				}
 			}
-			
-			for (List<String> listinha: lista) {
-				
+			for (List<String> listinha : lista) {
+				if (compra.getItem().getPrecoMercado().contains(listinha.get(0))) {
+					if (!listaPrecos.contains(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0)))) {
+						listaPrecos.add(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0) ));
+					}
+					listaPrecos.add("- " + compra.toString());
+				}
+
 			}
+
+			Collections.sort(listaPrecos, comparador1);
+			System.out.println(listaPrecos);
+			listaDefinitiva.add(listaPrecos);
 		}
-		System.out.println(lista);
 
-		return null;
+		return listaDefinitiva.get(posicaoEstabelecimento).get(posicaoLista);
 	}
-
 
 	private double pegaOsPrecos(String descritor, String mercado) {
 		double preco = 0.0;
