@@ -401,10 +401,7 @@ public class Controller {
 			throw new Error("Sistema iniciado pela primeira vez. Arquivo criado.");
 		}
 		
-		controllerListas.iniciaSistema();
-		
-	
-		
+		controllerListas.iniciaSistema();	
 		controllerItens.iniciaSistema();
 		
 
