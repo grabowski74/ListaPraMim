@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -370,18 +370,18 @@ public class ControllerListas {
 		return "Lista automatica 2 " + dataAtual;
 	}
 
-	/**
-	 * public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String
-	 * dataAtual) { adicionaListaDeCompras("Lista automatica 3 " + dataAtual); for
-	 * (Item a : itens) { if (a.getAparicoes() > mapaDasListas.size() / 2) { double
-	 * media = Math.floor(a.getQntAparicoes() / a.getAparicoes()); int med = (int)
-	 * media; adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a); } }
-	 * return "Lista automatica 3 " + dataAtual;
-	 * 
-	 * }
-	 * 
-	 * @throws IOException
-	 **/
+	public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String dataAtual) {
+		adicionaListaDeCompras("Lista automatica 3 " + dataAtual);
+		for (Item a : itens) {
+			if (a.getAparicoes() > mapaDasListas.size() / 2) {
+				double media = Math.floor(a.getQntAparicoes() / a.getAparicoes());
+				int med = (int) media;
+				adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a);
+			}
+		}
+		return "Lista automatica 3 " + dataAtual;
+
+	}
 
 	public void fechaSistema() throws IOException {
 		FileOutputStream salvar = null;
@@ -405,7 +405,7 @@ public class ControllerListas {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void iniciaSistema()  {
+	public void iniciaSistema() {
 		FileInputStream ler = null;
 		try {
 			ler = new FileInputStream(this.diretorio + File.separator + "saida.txt");
@@ -413,16 +413,52 @@ public class ControllerListas {
 			ObjectInputStream objeto = new ObjectInputStream(ler);
 			this.mapaDasListas = (HashMap<String, ListaDeCompras>) objeto.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			
+
 		} finally {
 			try {
 				ler.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
 
+	public String sugere(String descritor, int posicaoEstabelecimento, int posicaoLista) {
+		List<List<String>> lista = new ArrayList<>();
+		List<String> listaMercados = new ArrayList<>();
+		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+			List<String> listaPrecos = new ArrayList<>();
+			for (String mercado : compra.getItem().getPrecoMercado()) {
+				if (!listaMercados.contains(mercado)) {
+					listaMercados.add(mercado);
+				}
+			}
+			for (String mercado : listaMercados) {
+				List<String> sla = new ArrayList<>();
+				sla.add(mercado + ": " + pegaOsPrecos(descritor, mercado));
+				if (!lista.contains(sla)) {
+					lista.add(sla);
+				}
+			}
+			
+			for (List<String> listinha: lista) {
+				
+			}
+		}
+		System.out.println(lista);
+
+		return null;
+	}
+
+
+	private double pegaOsPrecos(String descritor, String mercado) {
+		double preco = 0.0;
+		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+			if (compra.getItem().getPrecoMercado().contains(mercado)) {
+				preco += compra.getItem().pegaPreco(mercado);
+			}
+		}
+		return preco;
 	}
 
 }

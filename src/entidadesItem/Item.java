@@ -2,10 +2,12 @@ package entidadesItem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -175,6 +177,14 @@ public abstract class Item implements Serializable {
 
 		return Collections.min(listPrecos);
 
+	}
+	
+	public double pegaPreco(String mercado){
+		return precos.get(mercado);
+	}
+	
+	public Set<String> getPrecoMercado() {
+		return precos.keySet();
 	}
 
 	

@@ -369,42 +369,37 @@ public class Controller {
 		return controllerListas.geraAutomaticaItem(descritorItem, dataAtual);
 	}
 
-	/**
-	 * public String geraAutomaticaItensMaisPresentes(String dataAtual) {
-	 * System.out.println(dataAtual); return
-	 * controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(),
-	 * dataAtual); }
-	 * 
-	 * @throws IOException
-	 **/
+	public String geraAutomaticaItensMaisPresentes(String dataAtual) {
+		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
+	}
 
 	public void fechaSistema() {
 		try {
 			controllerListas.fechaSistema();
 			flag = true;
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			controllerItens.fechaSistema();
-			flag= true;
+			flag = true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	public void iniciaSistema() {
-		if(flag == false) {
+		if (flag == false) {
 			throw new Error("Sistema iniciado pela primeira vez. Arquivo criado.");
 		}
-		
-		controllerListas.iniciaSistema();	
+		controllerListas.iniciaSistema();
 		controllerItens.iniciaSistema();
-		
 
+	}
+
+	public String sugereMelhorEstabelecimento(String descritor, int posicaoEstabelecimento, int posicaoLista) {
+		return controllerListas.sugere(descritor, posicaoEstabelecimento, posicaoLista);
 	}
 
 }
