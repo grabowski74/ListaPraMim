@@ -1,6 +1,8 @@
 package entidadesItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +17,11 @@ import java.util.Set;
  *         
  *         Classe que representa um item de supermercado.
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributo que representa o nome do Item.
 	protected String nome;
 	// Atributo que representa uma lista com todos os precos dos varios
@@ -160,6 +166,14 @@ public abstract class Item {
 
 		return Collections.min(listPrecos);
 
+	}
+	
+	public double pegaPreco(String mercado){
+		return precos.get(mercado);
+	}
+	
+	public Set<String> getPrecoMercado() {
+		return precos.keySet();
 	}
 	
 	

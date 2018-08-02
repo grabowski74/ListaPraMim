@@ -1,6 +1,12 @@
 package controllers;
 
 import java.util.Date;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,9 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import comparators.HoraComparatorListas;
+import comparators.StringComparator;
 import comparators.StringComparatorListas;
+import comparators.ListaMercadosComparator;
 import entidades.Compra;
 import entidades.ListaDeCompras;
 import entidadesItem.Item;
@@ -21,15 +28,15 @@ import entidadesItem.Item;
  * Representacao de um sitema de cadastro de lista de compras, nesse sistema e
  * possivel cadastrar, alterar, editar, adicionar e deletar listas e produtos.
  * ListaPraMim
-
+ * 
  * 
  * @author Matheus Silva Araujo - 117210375
  * @author Gabriel Guimaraes Almeida
  * 
-
+ * 
  *         Projeto de Laboratorio - Laboratorio de Programacao 2 - 2018.1
-
  *
+ * 
  */
 public class ControllerListas {
 
@@ -39,13 +46,15 @@ public class ControllerListas {
 	private ControllerItens listaDeItens;
 	private Comparator<String> comparador1;
 	private Comparator<ListaDeCompras> comparador2;
+	private Comparator<Item> comparador3;
 	private int id;
 	private String data;
+	private File diretorio;
 
 	/**
 	 * Realiza a construcao do ControllerListas do sistema, todo ControllerListas
 	 * instacia um mapa de listas de compras.
-
+	 * 
 	 */
 	public ControllerListas() {
 		this.mapaDasListas = new HashMap<>();
@@ -58,7 +67,7 @@ public class ControllerListas {
 	 * 
 	 * @param descritorLista
 	 *            e o nome da referida lista
-
+	 * 
 	 * @return retorna a descricao da lista cadastrada
 	 */
 	public String adicionaListaDeCompras(String descritorLista) {
@@ -68,14 +77,13 @@ public class ControllerListas {
 		return descritorLista;
 	}
 
-
 	/**
 	 * Realiza a operacao de pesquisar listas cadastradas no sistema a partir do seu
 	 * nome
 	 * 
 	 * @param descritorLista
 	 *            e o nome da referida lista
-
+	 * 
 	 * @return retorna o status da lista desejada
 	 */
 	public String pesquisaListaDeCompras(String descritorLista) {
@@ -96,7 +104,6 @@ public class ControllerListas {
 		return aux;
 	}
 
-
 	/**
 	 * Realiza a operacao de adicionar uma compra a uma lista ja cadastrada
 	 * 
@@ -106,14 +113,13 @@ public class ControllerListas {
 	 *            e a quantidade do item a ser adicionado
 	 * @param id
 	 *            e o numero de identificacao unica do item desejado
-
+	 * 
 	 */
 	public void adicionaCompraALista(String descritorLista, int qnt, Item item) {
 		if (mapaDasListas.containsKey(descritorLista)) {
 			mapaDasListas.get(descritorLista).adicionaCompra(qnt, item);
 		}
 	}
-
 
 	/**
 	 * Realiza a operacao de finalizar uma lista de compras
@@ -124,7 +130,7 @@ public class ControllerListas {
 	 *            e o local onde a compra foi realizada
 	 * @param valor
 	 *            e o valor final da compra
-
+	 * 
 	 */
 	public void finalizarListaDeCompras(String descritorLista, String localDaCompra, int valor) {
 		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
@@ -139,7 +145,6 @@ public class ControllerListas {
 			throw new IllegalArgumentException(
 					"Erro na finalizacao de lista de compras: valor final da lista invalido.");
 
-
 		}
 		mapaDasListas.get(descritorLista).finalizaLista(localDaCompra, valor);
 	}
@@ -151,7 +156,7 @@ public class ControllerListas {
 	 *            e o nome da lista referida
 	 * @param id
 	 *            e o numero de identificacao unica do item
-
+	 * 
 	 * @return retorna o status da compra
 	 */
 	public String pesquisaCompraEmLista(String descritorLista, int id) {
@@ -164,7 +169,6 @@ public class ControllerListas {
 		}
 		return mapaDasListas.get(descritorLista).pesquisa(id);
 	}
-
 
 	/**
 	 * Realiza a operacao de atualizar uma certa compra em uma lista
@@ -207,12 +211,10 @@ public class ControllerListas {
 	 *            e o numero de identificacao unica do item
 	 */
 
-
 	public void deletaCompraDaLista(String descritorLista, int id) {
 		if (descritorLista.equals(null) || descritorLista.trim().equals("")) {
 			throw new NullPointerException("Erro na exclusao de compra: descritor nao pode ser vazio ou nulo.");
 		}
-
 
 		boolean a = false;
 		for (ListaDeCompras b : mapaDasListas.values()) {
@@ -270,7 +272,6 @@ public class ControllerListas {
 			}
 		}
 
-
 		Collections.sort(listas, comparador1);
 
 		return mapaDasListas.get(listas.get(posicaoLista)).getData() + " - " + listas.get(posicaoLista);
@@ -281,7 +282,7 @@ public class ControllerListas {
 	 * 
 	 * @param data
 	 *            e a data desejada a ser pesquisada
-
+	 * 
 	 * @return retorna o status da lista
 	 */
 	public String pesquisaListaDeComprasPorData(String data) {
@@ -301,7 +302,6 @@ public class ControllerListas {
 				listas.add(lista.getDescritor());
 			}
 		}
-
 
 		Collections.sort(listas, comparador1);
 		return listas.toString();
@@ -327,7 +327,6 @@ public class ControllerListas {
 		if (listas.size() == 0) {
 			throw new NullPointerException("Erro na pesquisa de compra: compra nao encontrada na lista.");
 		}
-
 
 		Collections.sort(listas, comparador1);
 
@@ -394,6 +393,7 @@ public class ControllerListas {
 
 	}
 
+<<<<<<< HEAD
 	private int media(int qntAparicoes, int aparicoesListas) {
 		return (int) (qntAparicoes/aparicoesListas);
 	}
@@ -417,6 +417,94 @@ public class ControllerListas {
 			}
 		}
 		
+=======
+	public void fechaSistema() throws IOException {
+		FileOutputStream salvar = null;
+		if (diretorio == null) {
+			diretorio = new File("arquivosListas");
+			diretorio.mkdir();
+		}
+
+		try {
+			salvar = new FileOutputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectOutputStream objeto = new ObjectOutputStream(salvar);
+			objeto.writeObject(mapaDasListas);
+		} catch (IOException e) {
+		} finally {
+			if (salvar != null) {
+				salvar.close();
+			}
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void iniciaSistema() {
+		FileInputStream ler = null;
+		try {
+			ler = new FileInputStream(this.diretorio + File.separator + "saida.txt");
+			@SuppressWarnings("resource")
+			ObjectInputStream objeto = new ObjectInputStream(ler);
+			this.mapaDasListas = (HashMap<String, ListaDeCompras>) objeto.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+
+		} finally {
+			try {
+				ler.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public String sugere(String descritor, int posicaoEstabelecimento, int posicaoLista) {
+		this.comparador1 = new ListaMercadosComparator();
+		List<List<String>> lista = new ArrayList<>();
+		List<List<String>> listaDefinitiva = new ArrayList<>();
+		List<String> listaMercados = new ArrayList<>();
+
+		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+			List<String> listaPrecos = new ArrayList<>();
+			for (String mercado : compra.getItem().getPrecoMercado()) {
+				if (!listaMercados.contains(mercado)) {
+					listaMercados.add(mercado);
+				}
+			}
+			for (String mercado : listaMercados) {
+				List<String> sla = new ArrayList<>();
+				sla.add(mercado);
+				if (!lista.contains(sla)) {
+					lista.add(sla);
+				}
+			}
+			for (List<String> listinha : lista) {
+				if (compra.getItem().getPrecoMercado().contains(listinha.get(0))) {
+					if (!listaPrecos.contains(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0)))) {
+						listaPrecos.add(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0) ));
+					}
+					listaPrecos.add("- " + compra.toString());
+				}
+
+			}
+
+			Collections.sort(listaPrecos, comparador1);
+			System.out.println(listaPrecos);
+			listaDefinitiva.add(listaPrecos);
+		}
+
+		return listaDefinitiva.get(posicaoEstabelecimento).get(posicaoLista);
+	}
+
+	private double pegaOsPrecos(String descritor, String mercado) {
+		double preco = 0.0;
+		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+			if (compra.getItem().getPrecoMercado().contains(mercado)) {
+				preco += compra.getItem().pegaPreco(mercado);
+			}
+		}
+		return preco;
+>>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3
 	}
 
 }
