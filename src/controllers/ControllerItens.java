@@ -452,7 +452,10 @@ public class ControllerItens {
 		return this.itens;
 	}
 
-
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void fechaSistema() throws IOException {
 		FileOutputStream salvar = null;
 		if(diretorio == null) {
@@ -474,7 +477,9 @@ public class ControllerItens {
 		}		
 	}
 
-
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void iniciaSistema() {
 		FileInputStream ler = null;

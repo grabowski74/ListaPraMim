@@ -179,19 +179,35 @@ public abstract class Item implements Serializable {
 
 	}
 	
+	/**
+	 * 
+	 * @param mercado
+	 * @return
+	 */
 	public double pegaPreco(String mercado){
 		return precos.get(mercado);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Set<String> getPrecoMercado() {
 		return precos.keySet();
 	}
 
-	
+	/**
+	 * 
+	 * @param media
+	 */
 	public void setMedia(int media) {
 		this.media = media;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMedia() {
 		return this.media;
 	}
@@ -257,20 +273,34 @@ public abstract class Item implements Serializable {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @param qnt
+	 */
 	public void taNaLista(int qnt) {
 		this.aparicoes += 1;
 		this.qntAparicoes += qnt;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getAparicoes() {
 		return this.aparicoes;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getQntAparicoes() {
 		return this.qntAparicoes;
 	}
-
+	/**
+	 * 
+	 * @param qnt
+	 */
 	public void saiuDaLista(int qnt) {
 		this.aparicoes -= 1;
 		this.qntAparicoes -= qnt;

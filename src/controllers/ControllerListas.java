@@ -334,7 +334,12 @@ public class ControllerListas {
 
 		return listas.toString();
 	}
-
+	
+	/**
+	 * 
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaUltimaLista(String dataAtual) {
 		for (ListaDeCompras a : mapaDasListas.values()) {
 			if (a.getID() == this.id - 1) {
@@ -347,7 +352,13 @@ public class ControllerListas {
 		}
 		return "Lista automatica 1 " + dataAtual;
 	}
-
+	
+	/**
+	 * 
+	 * @param descritorItem
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaItem(String descritorItem, String dataAtual) {
 		int cont = 0;
 		boolean c = false;
@@ -372,7 +383,13 @@ public class ControllerListas {
 		}
 		return "Lista automatica 2 " + dataAtual;
 	}
-
+	
+	/**
+	 * 
+	 * @param itens
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String dataAtual) {
 		adicionaListaDeCompras("Lista automatica 3 " + dataAtual);
 		for (Item a : itens) {
@@ -385,7 +402,11 @@ public class ControllerListas {
 		return "Lista automatica 3 " + dataAtual;
 
 	}
-
+	
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void fechaSistema() throws IOException {
 		FileOutputStream salvar = null;
 		if (diretorio == null) {
@@ -406,7 +427,10 @@ public class ControllerListas {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void iniciaSistema() {
 		FileInputStream ler = null;

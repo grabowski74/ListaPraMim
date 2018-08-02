@@ -106,7 +106,10 @@ public class Compra {
 		return this.item.getNome();
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Item getItem() {
 		return this.item;
 	}

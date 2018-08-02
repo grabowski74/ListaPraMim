@@ -361,18 +361,37 @@ public class Controller {
 		return controllerListas.pesquisaListaDeComprasPorItem(id);
 	}
 
+	/**
+	 * 
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaUltimaLista(String dataAtual) {
 		return controllerListas.geraAutomaticaUltimaLista(dataAtual);
 	}
-
+	
+	/**
+	 * 
+	 * @param descritorItem
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaItem(String descritorItem, String dataAtual) {
 		return controllerListas.geraAutomaticaItem(descritorItem, dataAtual);
 	}
-
+	
+	/**
+	 * 
+	 * @param dataAtual
+	 * @return
+	 */
 	public String geraAutomaticaItensMaisPresentes(String dataAtual) {
 		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void fechaSistema() {
 		try {
 			controllerListas.fechaSistema();
@@ -388,7 +407,10 @@ public class Controller {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void iniciaSistema() {
 		if (flag == false) {
 			throw new Error("Sistema iniciado pela primeira vez. Arquivo criado.");
@@ -397,7 +419,14 @@ public class Controller {
 		controllerItens.iniciaSistema();
 
 	}
-
+	
+	/**
+	 * 
+	 * @param descritor
+	 * @param posicaoEstabelecimento
+	 * @param posicaoLista
+	 * @return
+	 */
 	public String sugereMelhorEstabelecimento(String descritor, int posicaoEstabelecimento, int posicaoLista) {
 		return controllerListas.sugere(descritor, posicaoEstabelecimento, posicaoLista);
 	}
