@@ -1,14 +1,8 @@
 package controllers;
 
-<<<<<<< HEAD
-import java.util.List;
-import java.util.ArrayList;
 
-import entidades.Compra;
-import entidades.ListaDeCompras;
-=======
 import java.io.IOException;
->>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3
+
 
 /**
  * Representacao de um sitema de cadastro de lista de compras, nesse sistema e
@@ -381,11 +375,6 @@ public class Controller {
 		return controllerListas.geraAutomaticaItensMaisPresentes(controllerItens.getItens(), dataAtual);
 	}
 
-<<<<<<< HEAD
-	public String sugereMelhorEstabelecimento(String descritor, int posicao, int posicaoLista) {
-		return controllerListas.sugereMelhorEstabelecimento(descritor, posicao, posicaoLista);
-	}
-=======
 	public void fechaSistema() {
 		try {
 			controllerListas.fechaSistema();
@@ -415,5 +404,4 @@ public class Controller {
 		return controllerListas.sugere(descritor, posicaoEstabelecimento, posicaoLista);
 	}
 
->>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3
 }

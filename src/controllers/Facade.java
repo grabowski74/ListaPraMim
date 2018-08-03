@@ -23,11 +23,8 @@ public class Facade {
 		args = new String[] { "controllers.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
 				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
 				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
-<<<<<<< HEAD
-				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt", "easyAccept/use_case6.txt", "easyAccept/use_case6_exception.txt"};
-=======
-				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt","easyAccept/use_case6.txt", "easyAccept/use_case7.txt" };
->>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3
+				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt","easyAccept/use_case6.txt", "easyAccept/use_case6_exception.txt", "easyAccept/use_case7.txt" };
+
 
 		EasyAccept.main(args);
 	}
@@ -292,14 +289,7 @@ public class Facade {
 	public String geraAutomaticaItensMaisPresentes() {
 		return controller.geraAutomaticaItensMaisPresentes(dataAtual());
 	}
-<<<<<<< HEAD
-	
-	public String sugereMelhorEstabelecimento(String descritor, int posicao, int posicaoLista) {
-		return controller.sugereMelhorEstabelecimento(descritor, posicao, posicaoLista);
-	}
 
-=======
- 
 	public String sugereMelhorEstabelecimento(String descritor, int posicaoEstabelecimento, int posicaoLista) {
 		return controller.sugereMelhorEstabelecimento(descritor, posicaoEstabelecimento, posicaoLista);
 	}
@@ -311,6 +301,5 @@ public class Facade {
 	public void iniciaSistema() {
 		controller.iniciaSistema();
 	}
->>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3
 
 }
