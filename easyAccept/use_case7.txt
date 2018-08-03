@@ -63,4 +63,6 @@ expect "Hiper Acude Velho" getItemListaPorData data=${dataAtual} posicaoLista=7
 expect "Hiper shopping" getItemListaPorData data=${dataAtual} posicaoLista=8
 expect "Lista automatica 1 "${dataAtual} getItemListaPorData data=${dataAtual} posicaoLista=9
 
+
 quit
+

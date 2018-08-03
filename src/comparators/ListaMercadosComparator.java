@@ -2,14 +2,21 @@ package comparators;
 
 import java.util.Comparator;
 
-public class ListaMercadosComparator implements Comparator<String>{
+import entidades.Compra;
+
+public class ListaMercadosComparator implements Comparator<Object>{
+	
+	private Comparator<Compra> comparador = new StringComparatorCompras();
 
 	@Override
-	public int compare(String o1, String o2) {
-		if(o1.startsWith("- ") && o2.startsWith("- ")) {
-			return o1.compareTo(o2);
+	public int compare(Object o1, Object o2) {
+		if(o1 instanceof Compra && o2 instanceof Compra) {
+			return comparador.compare((Compra) o1, (Compra) o2);
 		}
 		return 0;
 	}
+
+	
+	
 
 }

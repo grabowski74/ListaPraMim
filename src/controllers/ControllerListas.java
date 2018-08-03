@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +20,10 @@ import java.util.Map;
 
 import comparators.HoraComparatorListas;
 import comparators.StringComparator;
+import comparators.StringComparatorCompras;
 import comparators.StringComparatorListas;
 import comparators.ListaMercadosComparator;
+import comparators.ListasComparator;
 import entidades.Compra;
 import entidades.ListaDeCompras;
 import entidadesItem.Item;
@@ -46,7 +50,8 @@ public class ControllerListas {
 	private ControllerItens listaDeItens;
 	private Comparator<String> comparador1;
 	private Comparator<ListaDeCompras> comparador2;
-	private Comparator<Item> comparador3;
+	private Comparator<Object> comparador3;
+	private Comparator<List<String>> comparador4;
 	private int id;
 	private String data;
 	private File diretorio;
@@ -118,7 +123,6 @@ public class ControllerListas {
 	public void adicionaCompraALista(String descritorLista, int qnt, Item item) {
 		if (mapaDasListas.containsKey(descritorLista)) {
 			mapaDasListas.get(descritorLista).adicionaCompra(qnt, item);
-			item.taNaLista(qnt);
 		}
 	}
 
@@ -224,7 +228,6 @@ public class ControllerListas {
 			}
 		}
 		if (a) {
-			mapaDasListas.get(descritorLista).getItemPorId(id).saiuDaLista(listaDeCompras.getQnt());
 			mapaDasListas.get(descritorLista).deleta(id);
 		} else {
 			throw new Error("compra nao encontrada na lista.");
@@ -372,11 +375,11 @@ public class ControllerListas {
 			throw new Error(
 					"Erro na geracao de lista automatica por item: nao ha compras cadastradas com o item desejado.");
 		}
-		for (ListaDeCompras a : mapaDasListas.values()) {
-			if (a.getID() == cont) {
+		for (ListaDeCompras lista : mapaDasListas.values()) {
+			if (lista.getID() == cont) {
 				adicionaListaDeCompras("Lista automatica 2 " + dataAtual);
-				for (Compra b : a.getCompras()) {
-					adicionaCompraALista("Lista automatica 2 " + dataAtual, b.getQnt(), b.getItem());
+				for (Compra compra : lista.getCompras()) {
+					adicionaCompraALista("Lista automatica 2 " + dataAtual, compra.getQnt(), compra.getItem());
 				}
 				break;
 			}
@@ -392,12 +395,21 @@ public class ControllerListas {
 	 */
 	public String geraAutomaticaItensMaisPresentes(Collection<Item> itens, String dataAtual) {
 		adicionaListaDeCompras("Lista automatica 3 " + dataAtual);
-		for (Item a : itens) {
-			if (a.getAparicoes() > mapaDasListas.size() / 2) {
-				double media = Math.floor(a.getQntAparicoes() / a.getAparicoes());
-				int med = (int) media;
-				adicionaCompraALista("Lista automatica 3 " + dataAtual, med, a);
+		int aparicoesListas;
+		int qntAparicoes;
+		for (Item item : itens) {
+			aparicoesListas = 0;
+			qntAparicoes = 0;
+			for (ListaDeCompras lista : mapaDasListas.values()) {
+				if (lista.contemItem(item.getId())) {
+					aparicoesListas += 1;
+					qntAparicoes += lista.getCompra(item).getQnt();
+				}
 			}
+			if (aparicoesListas >= ((mapaDasListas.values().size() - 1) / 2.0)) {
+				adicionaCompraALista("Lista automatica 3 " + dataAtual, qntAparicoes / aparicoesListas, item);
+			}
+
 		}
 		return "Lista automatica 3 " + dataAtual;
 
@@ -451,51 +463,98 @@ public class ControllerListas {
 	}
 
 	public String sugere(String descritor, int posicaoEstabelecimento, int posicaoLista) {
-		this.comparador1 = new ListaMercadosComparator();
-		List<List<String>> lista = new ArrayList<>();
+		this.comparador4 = new ListasComparator();
+		List<List<Object>> lista = new ArrayList<>();
 		List<List<String>> listaDefinitiva = new ArrayList<>();
 		List<String> listaMercados = new ArrayList<>();
 
 		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
-			List<String> listaPrecos = new ArrayList<>();
 			for (String mercado : compra.getItem().getPrecoMercado()) {
 				if (!listaMercados.contains(mercado)) {
 					listaMercados.add(mercado);
 				}
 			}
-			for (String mercado : listaMercados) {
-				List<String> sla = new ArrayList<>();
-				sla.add(mercado);
-				if (!lista.contains(sla)) {
-					lista.add(sla);
+		}
+		for (String mercado : listaMercados) {
+			List<Object> outraListaPqSim= new ArrayList<>();
+			outraListaPqSim.add(mercado);
+			if (!lista.contains(outraListaPqSim)) {
+				lista.add(outraListaPqSim);
+			}
+		}
+		for (String mercado: listaMercados) {
+			for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+				if (compra.getItem().getPrecoMercado().contains(mercado)) {
+					adicionaNaLista(compra, mercado, lista);
 				}
 			}
-			for (List<String> listinha : lista) {
-				if (compra.getItem().getPrecoMercado().contains(listinha.get(0))) {
-					if (!listaPrecos.contains(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0)))) {
-						listaPrecos.add(listinha.get(0) + ": " + pegaOsPrecos(descritor, listinha.get(0) ));
-					}
-					listaPrecos.add("- " + compra.toString());
+		}
+		
+		
+		for (List<Object> oiaMaisUma: lista) {
+			List<String> listaPrecos = new ArrayList<>();
+			for (Object coisa: oiaMaisUma) {
+				if(coisa == oiaMaisUma.get(0)) {
+					listaPrecos.add(coisa + ": R$ " + pegaOsPrecos(descritor, (String) coisa));
+				} else {
+					listaPrecos.add("- "+((Compra) coisa).toString());
 				}
-
+				
 			}
-
-			Collections.sort(listaPrecos, comparador1);
-			System.out.println(listaPrecos);
 			listaDefinitiva.add(listaPrecos);
 		}
+		if(listaDefinitiva.size() == 0) {
+			throw new NullPointerException("Faltam dados para informar sobre preços em locais de compras.");
+		}
+		Collections.sort(listaDefinitiva, comparador4);
+		
+		if(posicaoLista >= listaDefinitiva.get(posicaoEstabelecimento).size()) {
+			return "";
+		}
+		
+		
 
 		return listaDefinitiva.get(posicaoEstabelecimento).get(posicaoLista);
 	}
 
-	private double pegaOsPrecos(String descritor, String mercado) {
-		double preco = 0.0;
-		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
-			if (compra.getItem().getPrecoMercado().contains(mercado)) {
-				preco += compra.getItem().pegaPreco(mercado);
+	private void adicionaNaLista(Compra compra, String mercado, List<List<Object>> lista) {
+		this.comparador3= new ListaMercadosComparator();
+		for (List<Object> listinha: lista) {
+			if (listinha.get(0).equals(mercado)) {
+				listinha.add(compra);
 			}
+			Collections.sort(listinha, comparador3);
 		}
-		return preco;
+		
+	}
+
+	private String pegaOsPrecos(String descritor, String mercado) {
+		double preco = 0.0;
+		DecimalFormat precoCerto = new DecimalFormat("#0.00");
+		for (Compra compra : mapaDasListas.get(descritor).getCompras()) {
+			
+			if (compra.getItem().getPrecoMercado().contains(mercado)) {
+				
+				preco += compra.getItem().pegaPreco(mercado) * compra.getQnt();
+			}
+			
+		}
+		return transformaDouble(precoCerto.format(preco));
+
+	}
+	
+	private String transformaDouble(String numero) {
+		String aux = "";
+		for(String parte: numero.split(",")) {
+			if(parte.equals(numero.split(",")[0])) {
+				aux += parte + ",";
+			} else if(parte.equals(numero.split(",")[1])){
+				aux += parte;
+			}
+			
+			
+		}
+		return aux;
 	}
 
 }

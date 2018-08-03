@@ -31,17 +31,9 @@ public abstract class Item implements Serializable {
 	protected int id;
 	// Atributo que representa a categoria a que o Item esta relacionado.
 	protected String categoria;
-	// O local onde foi registrado o Item.
-	protected String localDeCompra;
 	// O preco do Item.
 	protected double preco;
 
-	
-	private int media;
-	
-	private int aparicoes;
-	
-	private int qntAparicoes;
 
 
 	/**
@@ -68,11 +60,8 @@ public abstract class Item implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.localDeCompra = localDeCompra;
 		this.preco = preco;
 		adicionaPrecoItem(localDeCompra, preco);
-
-		this.media = 0;
 
 	}
 
@@ -196,21 +185,6 @@ public abstract class Item implements Serializable {
 		return precos.keySet();
 	}
 
-	/**
-	 * 
-	 * @param media
-	 */
-	public void setMedia(int media) {
-		this.media = media;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getMedia() {
-		return this.media;
-	}
 
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
@@ -273,39 +247,10 @@ public abstract class Item implements Serializable {
 		}
 	}
 
-	/**
-	 * 
-	 * @param qnt
-	 */
-	public void taNaLista(int qnt) {
-		this.aparicoes += 1;
-		this.qntAparicoes += qnt;
-	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getAparicoes() {
-		return this.aparicoes;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getQntAparicoes() {
-		return this.qntAparicoes;
-	}
-	/**
-	 * 
-	 * @param qnt
-	 */
-	public void saiuDaLista(int qnt) {
-		this.aparicoes -= 1;
-		this.qntAparicoes -= qnt;
-	}
-	
+	public Set<String> getPrecos(){
+		return precos.keySet();
 
+	}
 
 }
