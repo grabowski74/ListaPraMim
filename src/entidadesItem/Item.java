@@ -1,10 +1,13 @@
 package entidadesItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -14,7 +17,11 @@ import java.util.Map;
  *         
  *         Classe que representa um item de supermercado.
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributo que representa o nome do Item.
 	protected String nome;
 	// Atributo que representa uma lista com todos os precos dos varios
@@ -28,6 +35,14 @@ public abstract class Item {
 	protected String localDeCompra;
 	// O preco do Item.
 	protected double preco;
+
+	
+	private int media;
+	
+	private int aparicoes;
+	
+	private int qntAparicoes;
+
 
 	/**
 	 * Construtor da classe.
@@ -56,6 +71,9 @@ public abstract class Item {
 		this.localDeCompra = localDeCompra;
 		this.preco = preco;
 		adicionaPrecoItem(localDeCompra, preco);
+
+		this.media = 0;
+
 	}
 
 	/**
@@ -160,6 +178,40 @@ public abstract class Item {
 		return Collections.min(listPrecos);
 
 	}
+	
+	/**
+	 * 
+	 * @param mercado
+	 * @return
+	 */
+	public double pegaPreco(String mercado){
+		return precos.get(mercado);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Set<String> getPrecoMercado() {
+		return precos.keySet();
+	}
+
+	/**
+	 * 
+	 * @param media
+	 */
+	public void setMedia(int media) {
+		this.media = media;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getMedia() {
+		return this.media;
+	}
+
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
 
@@ -220,5 +272,40 @@ public abstract class Item {
 			throw new NullPointerException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
 		}
 	}
+
+	/**
+	 * 
+	 * @param qnt
+	 */
+	public void taNaLista(int qnt) {
+		this.aparicoes += 1;
+		this.qntAparicoes += qnt;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getAparicoes() {
+		return this.aparicoes;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getQntAparicoes() {
+		return this.qntAparicoes;
+	}
+	/**
+	 * 
+	 * @param qnt
+	 */
+	public void saiuDaLista(int qnt) {
+		this.aparicoes -= 1;
+		this.qntAparicoes -= qnt;
+	}
+	
+
 
 }

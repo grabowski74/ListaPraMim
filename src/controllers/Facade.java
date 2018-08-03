@@ -2,6 +2,7 @@ package controllers;
 
 import easyaccept.EasyAccept;
 import java.util.Date;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 /**
@@ -22,7 +23,9 @@ public class Facade {
 		args = new String[] { "controllers.Facade", "easyAccept/use_case1.txt", "easyAccept/use_case1_exception.txt",
 				"easyAccept/use_case2.txt", "easyAccept/use_case2_exception.txt", "easyAccept/use_case3.txt",
 				"easyAccept/use_case3_exception.txt", "easyAccept/use_case4.txt",
-				"easyAccept/use_case4_exception.txt" };
+				"easyAccept/use_case4_exception.txt", "easyAccept/use_case5.txt","easyAccept/use_case6.txt",
+				"easyAccept/use_case6_exception.txt","easyAccept/use_case7.txt" };
+
 		EasyAccept.main(args);
 	}
 	
@@ -272,6 +275,57 @@ public class Facade {
 	 */
 	public String pesquisaListasDeComprasPorItem(int id) {
 		return controller.pesquisaListaDeComprasPorItem(id);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String geraAutomaticaUltimaLista() {
+		return controller.geraAutomaticaUltimaLista(dataAtual());
+	}
+	
+	/**
+	 * 
+	 * @param descritorItem
+	 * @return
+	 */
+	public String geraAutomaticaItem(String descritorItem) {
+		return controller.geraAutomaticaItem( descritorItem, dataAtual());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String geraAutomaticaItensMaisPresentes() {
+		return controller.geraAutomaticaItensMaisPresentes(dataAtual());
+	}
+	
+	/**
+	 * 
+	 * @param descritor
+	 * @param posicaoEstabelecimento
+	 * @param posicaoLista
+	 * @return
+	 */
+	public String sugereMelhorEstabelecimento(String descritor, int posicaoEstabelecimento, int posicaoLista) {
+		return controller.sugereMelhorEstabelecimento(descritor, posicaoEstabelecimento, posicaoLista);
+	}
+	
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void fechaSistema() throws IOException {
+		controller.fechaSistema();
+	}
+	
+	/**
+	 * 
+	 */
+	public void iniciaSistema() {
+		controller.iniciaSistema();
 	}
 
 }
