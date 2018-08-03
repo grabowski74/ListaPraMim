@@ -31,17 +31,9 @@ public abstract class Item implements Serializable {
 	protected int id;
 	// Atributo que representa a categoria a que o Item esta relacionado.
 	protected String categoria;
-	// O local onde foi registrado o Item.
-	protected String localDeCompra;
 	// O preco do Item.
 	protected double preco;
 
-	
-	private int media;
-	
-	private int aparicoes;
-	
-	private int qntAparicoes;
 
 
 	/**
@@ -68,11 +60,8 @@ public abstract class Item implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
-		this.localDeCompra = localDeCompra;
 		this.preco = preco;
 		adicionaPrecoItem(localDeCompra, preco);
-
-		this.media = 0;
 
 	}
 
@@ -186,15 +175,8 @@ public abstract class Item implements Serializable {
 	public Set<String> getPrecoMercado() {
 		return precos.keySet();
 	}
-
 	
-	public void setMedia(int media) {
-		this.media = media;
-	}
 	
-	public int getMedia() {
-		return this.media;
-	}
 
 
 	/////////////////////////////////////////////////////// METODOSPRIVADOS///////////////////////////////////////////////////////
@@ -256,26 +238,9 @@ public abstract class Item implements Serializable {
 			throw new NullPointerException("Erro no cadastro de item: nome nao pode ser vazio ou nulo.");
 		}
 	}
-
-
-	public void taNaLista(int qnt) {
-		this.aparicoes += 1;
-		this.qntAparicoes += qnt;
-	}
 	
-	public int getAparicoes() {
-		return this.aparicoes;
+	public Set<String> getPrecos(){
+		return precos.keySet();
 	}
-	
-	public int getQntAparicoes() {
-		return this.qntAparicoes;
-	}
-
-	public void saiuDaLista(int qnt) {
-		this.aparicoes -= 1;
-		this.qntAparicoes -= qnt;
-	}
-	
-
 
 }

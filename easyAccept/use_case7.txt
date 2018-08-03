@@ -66,3 +66,4 @@ expect "Hiper shopping" getItemListaPorData data=${dataAtual} posicaoLista=6
 expect "Lista automatica 1 "${dataAtual} getItemListaPorData data=${dataAtual} posicaoLista=7
 
 quit
+>>>>>>> bdb0d9a575dbbbcae9379acffcbcc6fe70dac5a3

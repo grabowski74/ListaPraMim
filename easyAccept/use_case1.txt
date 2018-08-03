@@ -53,7 +53,7 @@ atualizaItem id=${id4} atributo="nome" novoValor="Creme Dental Oral-D"
 expect "4. Creme Dental Oral-D, higiene pessoal, Preco: <Mercadinho Bem Barato, R$ 3,79;>" exibeItem id=${id4}
 
 ###############################
-#  Adicionando novos preï¿½os  #
+#  Adicionando novos preços  #
 ###############################
 
 adicionaPrecoItem id=${id10} localDeCompra="Supermercado UauMart" preco=3.69

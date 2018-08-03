@@ -301,5 +301,22 @@ public class ListaDeCompras implements Serializable {
 		throw new NullPointerException("Erro na exclusao de compra: compra nao encontrada na lista.");
 	}
 
+	public Compra getCompra(Item item) {
+		for(Compra compra: compras) {
+			if(compra.getItem() == item) {
+				return compra;
+			}
+		}
+		return null;
+	}
+	
+	public String toString() {
+		String aux = "";
+		for (Compra compra: compras) {
+			aux += compra.toString() + "\n";
+		}
+		return aux;
+	}
+
 
 }
